@@ -9,6 +9,7 @@ import SouvenirPage from './pages/SouvenirPage';
 import MediaKitPage from './pages/MediaKitPage';
 import logoDark from './assets/logo/dark.png';
 import logoNormal from './assets/logo/normal.png';
+import { SITE_CONFIG } from '@/constants/config';
 import { 
   ArrowRight, 
   Camera, 
@@ -187,14 +188,14 @@ const Layout = ({ children, isDarkMode, toggleTheme, theme }: any) => {
           </div>
           
           <p className={`${theme.textMuted} text-sm text-center md:text-left font-bold`}>
-            &copy; {new Date().getFullYear()} Uni-Inside Creative Agency. All rights reserved.
+            &copy; {new Date().getFullYear()} {SITE_CONFIG.brand.name} {SITE_CONFIG.brand.subtitle}. All rights reserved.
           </p>
           
           <div className="flex items-center gap-4">
-            <a href="https://www.instagram.com/uniinside.studio?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className={`w-10 h-10 rounded-full ${isDarkMode ? 'bg-white/5' : 'bg-black/5'} flex items-center justify-center ${theme.textMuted} hover:${theme.text} ${theme.cardHover} transition-all`}>
+            <a href={SITE_CONFIG.socials.instagram.link} target="_blank" rel="noopener noreferrer" className={`w-10 h-10 rounded-full ${isDarkMode ? 'bg-white/5' : 'bg-black/5'} flex items-center justify-center ${theme.textMuted} hover:${theme.text} ${theme.cardHover} transition-all`}>
               <Instagram className="w-4 h-4" />
             </a>
-            <a href="https://www.tiktok.com/@uniinside.studio?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" className={`w-10 h-10 rounded-full ${isDarkMode ? 'bg-white/5' : 'bg-black/5'} flex items-center justify-center ${theme.textMuted} hover:${theme.text} ${theme.cardHover} transition-all`}>
+            <a href={SITE_CONFIG.socials.tiktok.link} target="_blank" rel="noopener noreferrer" className={`w-10 h-10 rounded-full ${isDarkMode ? 'bg-white/5' : 'bg-black/5'} flex items-center justify-center ${theme.textMuted} hover:${theme.text} ${theme.cardHover} transition-all`}>
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
               </svg>
@@ -691,7 +692,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
 
               <div className="space-y-4">
                 <motion.a 
-                  href="https://maps.app.goo.gl/uuckDPXqEHUtw1pQA"
+                  href={SITE_CONFIG.brand.address.mapsLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   initial="initial"
@@ -721,15 +722,15 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                       </motion.span>
                     </div>
                     <p className={`${theme.textMuted} leading-relaxed font-medium`}>
-                      Gedung Selaru lt. 4<br/>
-                      Fakultas Ilmu Terapan, Telkom University<br/>
-                      Jl. Telekomunikasi No.1, Sukapura, Kec. Dayeuhkolot, Kabupaten Bandung, Jawa Barat 40257
+                      {SITE_CONFIG.brand.address.line1}<br/>
+                      {SITE_CONFIG.brand.address.line2}<br/>
+                      {SITE_CONFIG.brand.address.line3}
                     </p>
                   </div>
                 </motion.a>
 
                 <motion.a 
-                  href="https://wa.me/628974395313"
+                  href={`https://wa.me/${SITE_CONFIG.brand.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   initial="initial"
@@ -758,12 +759,12 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                         Contact Us
                       </motion.span>
                     </div>
-                    <p className={`${theme.textMuted} font-medium`}>+62 897-4395-313</p>
+                    <p className={`${theme.textMuted} font-medium`}>{SITE_CONFIG.brand.whatsappDisplay}</p>
                   </div>
                 </motion.a>
 
                 <motion.a 
-                  href="mailto:uninsidemed@gmail.com"
+                  href={`mailto:${SITE_CONFIG.brand.email}`}
                   initial="initial"
                   whileHover="hover"
                   variants={{
@@ -790,7 +791,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                         Send an Email
                       </motion.span>
                     </div>
-                    <p className={`${theme.textMuted} font-medium`}>uninsidemed@gmail.com</p>
+                    <p className={`${theme.textMuted} font-medium`}>{SITE_CONFIG.brand.email}</p>
                   </div>
                 </motion.a>
               </div>
