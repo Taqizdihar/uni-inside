@@ -10,6 +10,7 @@ import MediaKitPage from './pages/MediaKitPage';
 import TeamSection from './components/TeamSection';
 import logoDark from './assets/logo/dark.png';
 import logoNormal from './assets/logo/normal.png';
+import heroImg from './assets/images/hero.jpg';
 import { SITE_CONFIG } from '@/constants/config';
 import { 
   ArrowRight, 
@@ -121,11 +122,11 @@ const Layout = ({ children, isDarkMode, toggleTheme, theme }: any) => {
           </Link>
           
           <div className={`hidden md:flex items-center gap-8 text-sm font-bold ${theme.textMuted}`}>
-            <a href="/#about-us" className={`hover:${theme.text} transition-colors`}>About Us</a>
-            <a href="/#why-us" className={`hover:${theme.text} transition-colors`}>Why Us</a>
-            <a href="/#our-team" className={`hover:${theme.text} transition-colors`}>Our Team</a>
-            <a href="/#products" className={`hover:${theme.text} transition-colors`}>Products</a>
-            <a href="/#contact" className={`hover:${theme.text} transition-colors`}>Contact</a>
+            <a href="/#about-us" className={`hover:text-uni-yellow transition-colors`}>About Us</a>
+            <a href="/#why-us" className={`hover:text-uni-yellow transition-colors`}>Why Us</a>
+            <a href="/#our-team" className={`hover:text-uni-yellow transition-colors`}>Our Team</a>
+            <a href="/#products" className={`hover:text-uni-yellow transition-colors`}>Products</a>
+            <a href="/#contact" className={`hover:text-uni-yellow transition-colors`}>Contact</a>
           </div>
 
           <div className="flex items-center gap-4">
@@ -398,7 +399,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
           >
             <motion.div variants={fadeInUp} className={`inline-flex items-center gap-2 px-3 py-1 rounded-full ${theme.cardBg} border ${theme.border} ${theme.text} text-sm font-bold mb-6`}>
               <Sparkles className={`w-4 h-4 ${theme.textYellow}`} />
-              <span>Creative Agency dari Telkom University</span>
+              <span>Creative Startup</span>
             </motion.div>
             <motion.h1 variants={fadeInUp} style={{ fontFamily: 'system-ui' }} className="text-5xl md:text-7xl font-black tracking-tighter leading-[1.1] mb-6">
               Empowering Your <br/>
@@ -408,11 +409,11 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
               Kami adalah sekumpulan mahasiswa kreatif yang siap mengubah ide brilian Anda menjadi karya visual dan strategi konten yang berdampak nyata. Mari ciptakan sesuatu yang luar biasa bersama.
             </motion.p>
             <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
-              <a href="#products" className="px-8 py-4 rounded-full bg-uni-yellow text-uni-black font-bold hover:brightness-110 transition-all flex items-center gap-2 shadow-lg shadow-uni-yellow/20">
-                Lihat Layanan Kami <ArrowRight className="w-5 h-5" />
-              </a>
+              <Link to="/mediakit" className="px-8 py-4 rounded-full bg-uni-yellow text-uni-black font-bold hover:brightness-110 transition-all flex items-center gap-2 shadow-lg shadow-uni-yellow/20">
+                Media Kit Kami <ArrowRight className="w-5 h-5" />
+              </Link>
               <a href="#contact" className={`px-8 py-4 rounded-full ${theme.cardBg} ${theme.cardHover} border ${theme.border} ${theme.text} font-bold transition-all`}>
-                Konsultasi Gratis
+                Hubungi Kami
               </a>
             </motion.div>
           </motion.div>
@@ -424,10 +425,9 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
             className={`relative aspect-[4/3] rounded-3xl overflow-hidden border ${theme.border} shadow-2xl ${isDarkMode ? 'shadow-uni-yellow/5' : 'shadow-black/10'} z-20`}
           >
             <img 
-              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
-              alt="Uni-Inside Creative Team" 
+              src={heroImg} 
+              alt="The Uni-Inside Team" 
               className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
             />
             <div className={`absolute inset-0 bg-gradient-to-t ${isDarkMode ? 'from-uni-black/90' : 'from-uni-white/90'} to-transparent`}></div>
             <div className="absolute bottom-6 left-6 right-6">

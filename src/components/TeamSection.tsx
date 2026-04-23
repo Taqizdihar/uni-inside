@@ -186,17 +186,17 @@ const TeamSection = ({ theme, isDarkMode }: any) => {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16 md:mb-24">
           <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-3`}>Our Team</h2>
-          <h3 className="text-4xl md:text-5xl font-black">Mengenal anggota kami lebih dekat</h3>
+          <h3 className="text-4xl md:text-5xl font-black mb-10">Mengenal anggota kami lebih dekat</h3>
           <motion.p
             animate={{ scale: [1, 1.05, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className={`mt-4 text-sm font-bold ${theme.textMuted}`}
+            className={`text-sm font-bold ${theme.textMuted}`}
           >
             klik kartu untuk lihat detail
           </motion.p>
         </div>
 
-        <div className="relative w-full h-[500px] flex items-center justify-center">
+        <div className="relative w-full h-[500px] flex items-center justify-center -mt-8">
           
           {/* Navigation Buttons */}
           <div className="absolute w-full max-w-4xl flex justify-between px-4 md:px-12 z-40 pointer-events-none">
