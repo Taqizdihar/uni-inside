@@ -1,18 +1,31 @@
 import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Download, Mail, Users, Target, ExternalLink, MessageCircle } from 'lucide-react';
+import { Download, Mail, Users, Target, ExternalLink, MessageCircle, Instagram, Youtube, Linkedin, Facebook } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
 import { SITE_CONFIG } from '@/constants/config';
 import logoDark from '../assets/logo/dark.png';
 import logoNormal from '../assets/logo/normal.png';
 
-const PLATFORM_ICONS: Record<string, string> = {
-  Instagram: "IG",
-  TikTok: "TK",
-  YouTube: "YT",
-  Twitter: "TW",
-  LinkedIn: "LI",
-  Facebook: "FB"
+const TikTokIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+  </svg>
+);
+
+const XIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.932zm-1.292 19.49h2.039L6.486 3.24H4.298l13.311 17.403z"/>
+  </svg>
+);
+
+const PLATFORM_ICONS: Record<string, any> = {
+  Instagram: Instagram,
+  TikTok: TikTokIcon,
+  YouTube: Youtube,
+  LinkedIn: Linkedin,
+  Facebook: Facebook,
+  X: XIcon,
+  Twitter: XIcon
 };
 
 const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }) => {
@@ -124,7 +137,11 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
               >
                 <div className="flex justify-between items-start mb-8">
                   <div className={`w-12 h-12 rounded-2xl ${isDarkMode ? 'bg-white/5' : 'bg-black/5'} border ${theme.border} flex items-center justify-center font-black ${theme.textYellow} group-hover:bg-[#FAD02C]/10 transition-colors`}>
-                    {PLATFORM_ICONS[social.platform] || social.platform.substring(0, 2).toUpperCase()}
+                    {PLATFORM_ICONS[social.platform] ? (
+                      React.createElement(PLATFORM_ICONS[social.platform], { className: "w-6 h-6" })
+                    ) : (
+                      social.platform.substring(0, 2).toUpperCase()
+                    )}
                   </div>
                   <ExternalLink className={`w-4 h-4 ${theme.textMuted} group-hover:${theme.textYellow} transition-colors`} />
                 </div>
@@ -208,7 +225,7 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
                     <img 
                       src={new URL(`../assets/partners/${partner.logo}`, import.meta.url).href} 
                       alt={partner.name} 
-                      className="w-full h-full object-scale-down p-1"
+                      className="w-full h-full object-contain"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = 'none';
                         (e.target as HTMLImageElement).parentElement!.innerText = partner.logo.substring(0, 2).toUpperCase();
