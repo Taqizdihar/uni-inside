@@ -30,13 +30,13 @@ export const SITE_CONFIG = {
   partners: [
     {
       name: "D3 Sistem Informasi",
-      logo: "TU",
+      logo: "d3si.jpg",
       description: "Program studi D3 Sistem Informasi Telkom University yang terakreditasi Unggul.",
       link: "https://telkomuniversity.ac.id"
     },
     {
       name: "Koperasi Giat Sejahtera Bersama",
-      logo: "BF",
+      logo: "giat.jpg",
       description: "Koperasi Telkom University yang menyediakan kebutuhan mahasiswa dan dosen.",
       link: "#"
     }
