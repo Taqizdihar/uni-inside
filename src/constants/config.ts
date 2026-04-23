@@ -44,5 +44,16 @@ export const SITE_CONFIG = {
   mediaKit: {
     totalFollowers: "142",
     growthDescription: "Total jumlah pengikut lintas sosial media aktif kami."
-  }
+  },
+  team: [
+    { id: 1, name: "Team Member 1", role: "Role 1", image: "member1.jpg", bio: "Placeholder bio for member 1." },
+    { id: 2, name: "Team Member 2", role: "Role 2", image: "member2.jpg", bio: "Placeholder bio for member 2." },
+    { id: 3, name: "Team Member 3", role: "Role 3", image: "member3.jpg", bio: "Placeholder bio for member 3." },
+    { id: 4, name: "Team Member 4", role: "Role 4", image: "member4.jpg", bio: "Placeholder bio for member 4." },
+    { id: 5, name: "Team Member 5", role: "Role 5", image: "member5.jpg", bio: "Placeholder bio for member 5." },
+    { id: 6, name: "Team Member 6", role: "Role 6", image: "member6.jpg", bio: "Placeholder bio for member 6." },
+    { id: 7, name: "Team Member 7", role: "Role 7", image: "member7.jpg", bio: "Placeholder bio for member 7." },
+    { id: 8, name: "Team Member 8", role: "Role 8", image: "member8.jpg", bio: "Placeholder bio for member 8." },
+    { id: 9, name: "Team Member 9", role: "Role 9", image: "member9.jpg", bio: "Placeholder bio for member 9." }
+  ]
 };

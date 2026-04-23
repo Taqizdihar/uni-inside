@@ -7,6 +7,7 @@ import EditPage from './pages/EditPage';
 import PhotographyPage from './pages/PhotographyPage';
 import SouvenirPage from './pages/SouvenirPage';
 import MediaKitPage from './pages/MediaKitPage';
+import TeamSection from './components/TeamSection';
 import logoDark from './assets/logo/dark.png';
 import logoNormal from './assets/logo/normal.png';
 import { SITE_CONFIG } from '@/constants/config';
@@ -535,6 +536,9 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
           </motion.div>
         </div>
       </section>
+
+      {/* Team Section */}
+      <TeamSection theme={theme} isDarkMode={isDarkMode} />
 
       {/* 4. Our Products & Services */}
       <section id="products" className={`py-16 px-6 ${theme.sectionBg} border-y ${theme.border} transition-colors duration-500`}>
