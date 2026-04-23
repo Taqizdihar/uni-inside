@@ -3,17 +3,17 @@ import { motion } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { SITE_CONFIG } from '@/constants/config';
 
-const TeamCard = ({ member, isActive, theme, isDarkMode }: any) => {
+const TeamCard = ({ member, position, isMobile, theme, isDarkMode }: any) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
-    if (!isActive) {
+    if (position !== 'center') {
       setIsFlipped(false);
     }
-  }, [isActive]);
+  }, [position]);
 
   const handleClick = () => {
-    if (isActive) {
+    if (position === 'center') {
       setIsFlipped(!isFlipped);
     }
   };
@@ -26,17 +26,28 @@ const TeamCard = ({ member, isActive, theme, isDarkMode }: any) => {
     }
   };
 
+  // Determine animation properties based on position
+  let animateProps: any = { x: 0, scale: 0.5, opacity: 0, zIndex: 10 };
+  let hoverProps: any = {};
+
+  if (position === 'center') {
+    animateProps = { x: 0, scale: 1, opacity: 1, zIndex: 30 };
+    hoverProps = { scale: 1.05 };
+  } else if (position === 'left') {
+    animateProps = { x: isMobile ? -130 : -240, scale: 0.8, opacity: 0.5, zIndex: 20 };
+  } else if (position === 'right') {
+    animateProps = { x: isMobile ? 130 : 240, scale: 0.8, opacity: 0.5, zIndex: 20 };
+  }
+
   return (
     <motion.div
-      className={`relative w-64 h-96 shrink-0 cursor-pointer ${isActive ? 'z-20' : 'z-10'}`}
+      className={`absolute top-0 bottom-0 m-auto w-64 h-96 ${position === 'center' ? 'cursor-pointer' : ''}`}
       style={{ perspective: 1000 }}
-      animate={{
-        scale: isActive ? 1.1 : 0.85,
-        opacity: isActive ? 1 : 0.4,
-      }}
-      whileHover={isActive ? { scale: 1.15 } : {}}
-      transition={{ duration: 0.5, type: "spring", stiffness: 300, damping: 25 }}
+      animate={animateProps}
+      whileHover={hoverProps}
+      transition={{ duration: 0.6, type: "spring", stiffness: 300, damping: 30 }}
       onClick={handleClick}
+      initial={false}
     >
       <motion.div
         className="w-full h-full relative"
@@ -46,7 +57,7 @@ const TeamCard = ({ member, isActive, theme, isDarkMode }: any) => {
       >
         {/* Front Side */}
         <div 
-          className={`absolute inset-0 ${theme.cardBg} border ${theme.border} rounded-3xl overflow-hidden backdrop-blur-xl flex flex-col`} 
+          className={`absolute inset-0 ${theme.cardBg} border ${theme.border} rounded-3xl overflow-hidden backdrop-blur-xl flex flex-col ${position === 'center' && isDarkMode ? 'shadow-[0_0_30px_rgba(250,208,44,0.1)]' : position === 'center' ? 'shadow-xl' : ''}`} 
           style={{ backfaceVisibility: 'hidden' }}
         >
           <div className="w-full h-2/3 relative bg-gray-200 overflow-hidden">
@@ -86,7 +97,15 @@ const TeamCard = ({ member, isActive, theme, isDarkMode }: any) => {
 
 const TeamSection = ({ theme, isDarkMode }: any) => {
   const team = SITE_CONFIG.team;
-  const [activeIndex, setActiveIndex] = useState(Math.floor(team.length / 2));
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile(); // Check on initial mount
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleNext = () => {
     setActiveIndex((prev) => (prev + 1) % team.length);
@@ -96,12 +115,16 @@ const TeamSection = ({ theme, isDarkMode }: any) => {
     setActiveIndex((prev) => (prev - 1 + team.length) % team.length);
   };
 
-  const handleDragEnd = (event: any, info: any) => {
-    if (info.offset.x < -50) {
-      handleNext();
-    } else if (info.offset.x > 50) {
-      handlePrev();
-    }
+  const getCardPosition = (index: number) => {
+    if (index === activeIndex) return 'center';
+    
+    const prevIndex = (activeIndex - 1 + team.length) % team.length;
+    if (index === prevIndex) return 'left';
+    
+    const nextIndex = (activeIndex + 1) % team.length;
+    if (index === nextIndex) return 'right';
+    
+    return 'hidden';
   };
 
   return (
@@ -112,49 +135,41 @@ const TeamSection = ({ theme, isDarkMode }: any) => {
           <h3 className="text-4xl md:text-5xl font-black">Tim Kami.</h3>
         </div>
 
-        <div className="relative w-full h-[500px]">
+        <div className="relative w-full h-[500px] flex items-center justify-center">
+          
           {/* Navigation Buttons */}
-          <button 
-            onClick={handlePrev}
-            className={`absolute left-0 top-1/2 -translate-y-1/2 z-30 p-4 rounded-full ${theme.cardBg} border ${theme.border} ${theme.cardHover} backdrop-blur-md hidden md:flex shadow-xl`}
-          >
-            <ChevronLeft className={`w-6 h-6 ${theme.text}`} />
-          </button>
-
-          <button 
-            onClick={handleNext}
-            className={`absolute right-0 top-1/2 -translate-y-1/2 z-30 p-4 rounded-full ${theme.cardBg} border ${theme.border} ${theme.cardHover} backdrop-blur-md hidden md:flex shadow-xl`}
-          >
-            <ChevronRight className={`w-6 h-6 ${theme.text}`} />
-          </button>
-
-          {/* Carousel Track */}
-          <div className="absolute left-1/2 top-0 bottom-0 flex items-center">
-            <motion.div 
-              className="flex items-center gap-8"
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.2}
-              onDragEnd={handleDragEnd}
-              animate={{ x: -1 * (activeIndex * (256 + 32) + 128) }} // 256px card + 32px gap, 128px is half card width
-              transition={{ type: "spring", stiffness: 200, damping: 25 }}
+          <div className="absolute w-full max-w-4xl flex justify-between px-4 md:px-12 z-40 pointer-events-none">
+            <button 
+              onClick={handlePrev}
+              className={`pointer-events-auto p-4 rounded-full ${theme.cardBg} border ${theme.border} ${theme.cardHover} backdrop-blur-md shadow-xl transition-all hover:scale-110 active:scale-95`}
+              aria-label="Previous Team Member"
             >
-              {team.map((member, i) => (
-                <TeamCard 
-                  key={member.id} 
-                  member={member} 
-                  isActive={i === activeIndex} 
-                  theme={theme}
-                  isDarkMode={isDarkMode}
-                />
-              ))}
-            </motion.div>
+              <ChevronLeft className={`w-6 h-6 ${theme.text}`} />
+            </button>
+
+            <button 
+              onClick={handleNext}
+              className={`pointer-events-auto p-4 rounded-full ${theme.cardBg} border ${theme.border} ${theme.cardHover} backdrop-blur-md shadow-xl transition-all hover:scale-110 active:scale-95`}
+              aria-label="Next Team Member"
+            >
+              <ChevronRight className={`w-6 h-6 ${theme.text}`} />
+            </button>
           </div>
-        </div>
-        
-        {/* Mobile helper text */}
-        <div className="text-center mt-8 md:hidden">
-          <p className={`text-sm ${theme.textMuted} animate-pulse`}>Geser untuk melihat tim</p>
+
+          {/* Stacked Carousel */}
+          <div className="relative w-full h-full flex justify-center perspective-1000">
+            {team.map((member, i) => (
+              <TeamCard 
+                key={member.id} 
+                member={member} 
+                position={getCardPosition(i)} 
+                isMobile={isMobile}
+                theme={theme}
+                isDarkMode={isDarkMode}
+              />
+            ))}
+          </div>
+
         </div>
       </div>
     </section>
