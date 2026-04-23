@@ -75,7 +75,7 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3 }}
-                className="h-24 w-auto object-contain"
+                className="h-72 w-auto object-contain"
               />
             </AnimatePresence>
           </motion.div>
