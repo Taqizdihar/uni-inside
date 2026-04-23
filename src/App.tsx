@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, createContext, useContext } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring, useMotionTemplate } from 'motion/react';
 import CameraPage from './pages/CameraPage';
@@ -16,7 +16,12 @@ import heroImg from './assets/images/hero.jpg';
 import universeLogo from './assets/app products/UNI-VERSE.png';
 import aiseoDark from './assets/app products/UNI-AISEO Dark Mode.png';
 import aiseoLight from './assets/app products/UNI-AISEO Light Mode.png';
-import { SITE_CONFIG } from '@/constants/config';
+import { SITE_CONFIG, UI_TEXT, t } from '@/constants/config';
+import type { Lang } from '@/constants/config';
+
+// Language Context
+const LangContext = createContext<{ lang: Lang; toggleLang: () => void }>({ lang: 'id', toggleLang: () => {} });
+export const useLang = () => useContext(LangContext);
 import { 
   ArrowRight, 
   Camera, 
@@ -105,7 +110,7 @@ const FeatureCard = ({ icon: Icon, title, desc, theme, isDarkMode }: any) => {
   );
 };
 
-const Layout = ({ children, isDarkMode, toggleTheme, theme }: any) => {
+const Layout = ({ children, isDarkMode, toggleTheme, theme, lang, toggleLang }: any) => {
   return (
     <div className={`min-h-screen ${theme.bg} ${theme.text} font-sans selection:bg-uni-yellow/30 transition-colors duration-500`}>
       {/* Navigation */}
@@ -127,14 +132,34 @@ const Layout = ({ children, isDarkMode, toggleTheme, theme }: any) => {
           </Link>
           
           <div className={`hidden md:flex items-center gap-8 text-sm font-bold ${theme.textMuted}`}>
-            <a href="/#about-us" className={`hover:text-uni-yellow transition-colors`}>About Us</a>
-            <a href="/#why-us" className={`hover:text-uni-yellow transition-colors`}>Why Us</a>
-            <a href="/#our-team" className={`hover:text-uni-yellow transition-colors`}>Our Team</a>
-            <a href="/#products" className={`hover:text-uni-yellow transition-colors`}>Products</a>
-            <a href="/#contact" className={`hover:text-uni-yellow transition-colors`}>Contact</a>
+            <a href="/#about-us" className={`hover:text-uni-yellow transition-colors`}>{t(UI_TEXT.nav.aboutUs, lang)}</a>
+            <a href="/#why-us" className={`hover:text-uni-yellow transition-colors`}>{t(UI_TEXT.nav.whyUs, lang)}</a>
+            <a href="/#our-team" className={`hover:text-uni-yellow transition-colors`}>{t(UI_TEXT.nav.ourTeam, lang)}</a>
+            <a href="/#products" className={`hover:text-uni-yellow transition-colors`}>{t(UI_TEXT.nav.products, lang)}</a>
+            <a href="/#contact" className={`hover:text-uni-yellow transition-colors`}>{t(UI_TEXT.nav.contact, lang)}</a>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLang}
+              className={`px-3 py-2 rounded-full ${theme.cardBg} ${theme.cardHover} border ${theme.border} transition-colors flex items-center justify-center text-xs font-black tracking-wider`}
+              aria-label="Toggle Language"
+            >
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={lang}
+                  initial={{ y: -12, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: 12, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {lang === 'id' ? 'ID' : 'EN'}
+                </motion.span>
+              </AnimatePresence>
+            </button>
+
+            {/* Theme Toggle */}
             <button 
               onClick={toggleTheme}
               className={`p-2.5 rounded-full ${theme.cardBg} ${theme.cardHover} border ${theme.border} transition-colors relative overflow-hidden flex items-center justify-center`}
@@ -196,7 +221,7 @@ const Layout = ({ children, isDarkMode, toggleTheme, theme }: any) => {
           </div>
           
           <p className={`${theme.textMuted} text-sm text-center md:text-left font-bold`}>
-            &copy; {new Date().getFullYear()} {SITE_CONFIG.brand.name} {SITE_CONFIG.brand.subtitle}. All rights reserved.
+            &copy; 2026 {t(UI_TEXT.footer.copyright, lang)}
           </p>
           
           <div className="flex items-center gap-4">
@@ -215,7 +240,7 @@ const Layout = ({ children, isDarkMode, toggleTheme, theme }: any) => {
   );
 };
 
-function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
+function LandingPage({ isDarkMode, toggleTheme, theme, lang }: any) {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
@@ -258,7 +283,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
   });
   const parallaxY = useTransform(aboutScroll, [0, 1], [-100, 100]);
 
-  const aboutText = "Lahir dari semangat inovasi kampus, kami hadir menjembatani ide dan realita. Kami percaya setiap cerita berhak disampaikan dengan cara luar biasa, menggabungkan tren terkini dan eksekusi profesional untuk hasil yang melampaui ekspektasi.";
+  const aboutText = t(UI_TEXT.aboutUs.text, lang);
   const aboutWords = aboutText.split(" ");
 
   const fadeInUp = {
@@ -404,21 +429,21 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
           >
             <motion.div variants={fadeInUp} className={`inline-flex items-center gap-2 px-3 py-1 rounded-full ${theme.cardBg} border ${theme.border} ${theme.text} text-sm font-bold mb-6`}>
               <Sparkles className={`w-4 h-4 ${theme.textYellow}`} />
-              <span>Creative Startup</span>
+              <span>{t(UI_TEXT.hero.badge, lang)}</span>
             </motion.div>
             <motion.h1 variants={fadeInUp} style={{ fontFamily: 'system-ui' }} className="text-5xl md:text-7xl font-black tracking-tighter leading-[1.1] mb-6">
-              Empowering Your <br/>
-              <span className={theme.textYellow}>Creative Vision.</span>
+              {t(UI_TEXT.hero.heading1, lang)} <br/>
+              <span className={theme.textYellow}>{t(UI_TEXT.hero.heading2, lang)}</span>
             </motion.h1>
             <motion.p variants={fadeInUp} className={`text-lg ${theme.textMuted} mb-8 leading-relaxed max-w-xl`}>
-              Kami adalah sekumpulan mahasiswa kreatif yang siap mengubah ide brilian Anda menjadi karya visual dan strategi konten yang berdampak nyata. Mari ciptakan sesuatu yang luar biasa bersama.
+              {t(UI_TEXT.hero.description, lang)}
             </motion.p>
             <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
               <Link to="/mediakit" className="px-8 py-4 rounded-full bg-uni-yellow text-uni-black font-bold hover:brightness-110 transition-all flex items-center gap-2 shadow-lg shadow-uni-yellow/20">
-                Media Kit Kami <ArrowRight className="w-5 h-5" />
+                {t(UI_TEXT.hero.ctaPrimary, lang)} <ArrowRight className="w-5 h-5" />
               </Link>
               <a href="#contact" className={`px-8 py-4 rounded-full ${theme.cardBg} ${theme.cardHover} border ${theme.border} ${theme.text} font-bold transition-all`}>
-                Hubungi Kami
+                {t(UI_TEXT.hero.ctaSecondary, lang)}
               </a>
             </motion.div>
           </motion.div>
@@ -441,8 +466,8 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                   <Video className="w-6 h-6 text-uni-black" />
                 </div>
                 <div>
-                  <p className={`font-bold ${isDarkMode ? 'text-white' : 'text-uni-black'}`}>Produksi Konten Kreatif</p>
-                  <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} font-medium`}>Kualitas profesional, sentuhan anak muda.</p>
+                  <p className={`font-bold ${isDarkMode ? 'text-white' : 'text-uni-black'}`}>{t(UI_TEXT.hero.overlayTitle, lang)}</p>
+                  <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} font-medium`}>{t(UI_TEXT.hero.overlaySubtitle, lang)}</p>
                 </div>
               </div>
             </div>
@@ -478,7 +503,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
             variants={fadeInUp}
             className="max-w-4xl mx-auto text-center"
           >
-            <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-6`}>About Us</h2>
+            <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-6`}>{t(UI_TEXT.aboutUs.label, lang)}</h2>
             <motion.p 
               initial="hidden"
               whileInView="visible"
@@ -486,7 +511,8 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
               variants={{
                 visible: { transition: { staggerChildren: 0.05 } }
               }}
-              className="text-2xl md:text-4xl font-bold font-['Poppins'] leading-tight flex flex-wrap justify-center"
+              style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700 }}
+              className="text-2xl md:text-4xl leading-tight flex flex-wrap justify-center"
             >
               {aboutWords.map((word, i) => (
                 <motion.span 
@@ -509,8 +535,8 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
       <section id="why-us" className="py-24 px-6 relative overflow-hidden">
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="mb-16 md:mb-24 text-center">
-            <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-3`}>Why Choose Us</h2>
-            <h3 className="text-4xl md:text-5xl font-black">Keunggulan Kami</h3>
+            <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-3`}>{t(UI_TEXT.whyUs.label, lang)}</h2>
+            <h3 className="text-4xl md:text-5xl font-black">{t(UI_TEXT.whyUs.heading, lang)}</h3>
           </div>
           
           <motion.div 
@@ -520,28 +546,12 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
             variants={staggerContainer}
             className="grid md:grid-cols-3 gap-8"
           >
-            {[
-              {
-                icon: Zap,
-                title: "Ide Segar & Kekinian",
-                desc: "Sebagai mahasiswa, kami selalu up-to-date dengan tren digital terbaru. Kami membawa perspektif segar yang relevan dengan audiens masa kini."
-              },
-              {
-                icon: Target,
-                title: "Eksekusi Profesional",
-                desc: "Meski berjiwa muda, standar kerja kami tetap profesional. Ketepatan waktu, kualitas alat, dan hasil akhir adalah prioritas utama kami."
-              },
-              {
-                icon: CheckCircle2,
-                title: "Harga Fleksibel",
-                desc: "Kami memahami kebutuhan budget yang beragam. Layanan kami dirancang untuk memberikan value maksimal dengan harga yang masuk akal."
-              }
-            ].map((item, i) => (
+            {UI_TEXT.whyUs.items.map((item, i) => (
               <motion.div key={i} variants={fadeInUp} className="h-full">
                 <FeatureCard 
-                  icon={item.icon}
-                  title={item.title}
-                  desc={item.desc}
+                  icon={[Zap, Target, CheckCircle2][i]}
+                  title={t(item.title, lang)}
+                  desc={t(item.desc, lang)}
                   theme={theme}
                   isDarkMode={isDarkMode}
                 />
@@ -553,15 +563,15 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
 
       {/* Team Section */}
       <div id="our-team">
-        <TeamSection theme={theme} isDarkMode={isDarkMode} />
+        <TeamSection theme={theme} isDarkMode={isDarkMode} lang={lang} />
       </div>
 
       {/* 4. Our Products & Services */}
       <section id="products" className={`py-24 ${theme.sectionBg} border-y ${theme.border} transition-colors duration-500`}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
-            <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-3`}>Our Products & Services</h2>
-            <h3 className="text-4xl md:text-5xl font-black max-w-2xl mb-12">Layanan Kreatif yang Kami Tawarkan untuk Anda</h3>
+            <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-3`}>{t(UI_TEXT.products.label, lang)}</h2>
+            <h3 className="text-4xl md:text-5xl font-black max-w-2xl mb-12">{t(UI_TEXT.products.heading, lang)}</h3>
             
             {/* Produk Aplikasi Kami - Full-Width Section Divider Bar */}
             <div className="relative left-1/2 -translate-x-1/2 w-screen py-16 mb-20 overflow-hidden">
@@ -571,7 +581,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
               {/* Centered Content within Full-Width Bar */}
               <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <h4 className={`text-2xl md:text-3xl font-black mb-8 text-left ${isDarkMode ? 'text-white' : 'text-uni-black'}`}>
-                  Produk Aplikasi Kami
+                  {t(UI_TEXT.products.appHeading, lang)}
                 </h4>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -603,7 +613,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 1.1 }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                        className="max-h-32 md:max-h-40 w-auto object-contain transition-transform duration-500 group-hover:scale-105 relative z-10"
+                        className="max-h-36 md:max-h-44 w-auto object-contain transition-transform duration-500 group-hover:scale-105 relative z-10"
                       />
                     </AnimatePresence>
                   </motion.div>
@@ -616,47 +626,47 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
             {[
               { 
                 id: 'camera', 
-                title: "Sewa Kamera", 
-                subtitle: "Sewa kamera berkualitas tinggi dengan penyimpanan besar", 
+                title: t(UI_TEXT.products.items[0].title, lang), 
+                subtitle: t(UI_TEXT.products.items[0].subtitle, lang), 
                 img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
                 icon: Camera,
-                cta: "Sewa Sekarang",
+                cta: t(UI_TEXT.products.items[0].cta, lang),
                 path: "/camera"
               },
               { 
                 id: 'drone', 
-                title: "Sewa Drone", 
-                subtitle: "Sewa drone untuk dokumentasi video cinematic", 
+                title: t(UI_TEXT.products.items[1].title, lang), 
+                subtitle: t(UI_TEXT.products.items[1].subtitle, lang), 
                 img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
                 icon: Video,
-                cta: "Sewa Sekarang",
+                cta: t(UI_TEXT.products.items[1].cta, lang),
                 path: "/drone"
               },
               { 
                 id: 'edit', 
-                title: "Jasa Edit", 
-                subtitle: "Jasa editing video untuk konten sosial media atau proyek pribadi", 
+                title: t(UI_TEXT.products.items[2].title, lang), 
+                subtitle: t(UI_TEXT.products.items[2].subtitle, lang), 
                 img: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
                 icon: PenTool,
-                cta: "Edit Video",
+                cta: t(UI_TEXT.products.items[2].cta, lang),
                 path: "/edit"
               },
               { 
                 id: 'photography', 
-                title: "Jasa Fotografi", 
-                subtitle: "Jasa fotografi profesional untuk acara, produk, atau portofolio", 
+                title: t(UI_TEXT.products.items[3].title, lang), 
+                subtitle: t(UI_TEXT.products.items[3].subtitle, lang), 
                 img: "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
                 icon: Camera,
-                cta: "Booking Sekarang",
+                cta: t(UI_TEXT.products.items[3].cta, lang),
                 path: "/photography"
               },
               { 
                 id: 'souvenir', 
-                title: "Paket Suvenir", 
-                subtitle: "Paket suvenir eksklusif untuk kenang-kenangan", 
+                title: t(UI_TEXT.products.items[4].title, lang), 
+                subtitle: t(UI_TEXT.products.items[4].subtitle, lang), 
                 img: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
                 icon: Sparkles,
-                cta: "Pesan Sekarang",
+                cta: t(UI_TEXT.products.items[4].cta, lang),
                 path: "/souvenir"
               }
             ].map((product, i) => (
@@ -752,10 +762,10 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-3`}>Contact Us</h2>
-              <h3 className="text-4xl md:text-5xl font-black mb-6">Mari Berkolaborasi</h3>
+              <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-3`}>{t(UI_TEXT.contact.label, lang)}</h2>
+              <h3 className="text-4xl md:text-5xl font-black mb-6">{t(UI_TEXT.contact.heading, lang)}</h3>
               <p className={`${theme.textMuted} text-lg mb-12 max-w-md font-medium`}>
-                Punya ide gila yang ingin diwujudkan? Atau sekadar ingin bertanya tentang layanan kami? Jangan ragu untuk menghubungi tim Uni-Inside.
+                {t(UI_TEXT.contact.description, lang)}
               </p>
 
               <div className="space-y-4">
@@ -777,7 +787,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                   </div>
                   <div>
                     <div className="flex items-center mb-1">
-                      <h4 className="font-black text-lg">Office Address</h4>
+                      <h4 className="font-black text-lg">{t(UI_TEXT.contact.officeAddress, lang)}</h4>
                       <motion.span 
                         variants={{
                           initial: { opacity: 0, x: -10 },
@@ -786,7 +796,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                         transition={{ duration: 0.3 }}
                         className="hidden md:inline-flex ml-3 px-2.5 py-0.5 rounded-full bg-uni-yellow text-uni-black text-[10px] font-bold uppercase tracking-wider items-center"
                       >
-                        Check on Maps
+                        {t(UI_TEXT.contact.checkMaps, lang)}
                       </motion.span>
                     </div>
                     <p className={`${theme.textMuted} leading-relaxed font-medium`}>
@@ -824,7 +834,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                         transition={{ duration: 0.3 }}
                         className="hidden md:inline-flex ml-3 px-2.5 py-0.5 rounded-full bg-uni-yellow text-uni-black text-[10px] font-bold uppercase tracking-wider items-center"
                       >
-                        Contact Us
+                        {t(UI_TEXT.contact.contactUs, lang)}
                       </motion.span>
                     </div>
                     <p className={`${theme.textMuted} font-medium`}>{SITE_CONFIG.brand.whatsappDisplay}</p>
@@ -856,7 +866,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                         transition={{ duration: 0.3 }}
                         className="hidden md:inline-flex ml-3 px-2.5 py-0.5 rounded-full bg-uni-yellow text-uni-black text-[10px] font-bold uppercase tracking-wider items-center"
                       >
-                        Send an Email
+                        {t(UI_TEXT.contact.sendEmail, lang)}
                       </motion.span>
                     </div>
                     <p className={`${theme.textMuted} font-medium`}>{SITE_CONFIG.brand.email}</p>
@@ -874,7 +884,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
             >
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className={`block text-sm font-black ${theme.textMuted} mb-2`}>Nama Lengkap</label>
+                  <label htmlFor="name" className={`block text-sm font-black ${theme.textMuted} mb-2`}>{t(UI_TEXT.contact.formName, lang)}</label>
                   <input 
                     type="text" 
                     id="name"
@@ -883,7 +893,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                     onChange={handleInputChange}
                     required
                     className={`w-full ${theme.inputBg} border ${theme.inputBorder} rounded-xl px-4 py-3 ${theme.text} focus:outline-none focus:border-uni-yellow focus:ring-1 focus:ring-uni-yellow transition-all font-medium`}
-                    placeholder="Masukkan nama Anda"
+                    placeholder={t(UI_TEXT.contact.formNamePlaceholder, lang)}
                   />
                 </div>
                 <div>
@@ -900,7 +910,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                   />
                 </div>
                 <div>
-                  <label htmlFor="message" className={`block text-sm font-black ${theme.textMuted} mb-2`}>Pesan / Detail Proyek</label>
+                  <label htmlFor="message" className={`block text-sm font-black ${theme.textMuted} mb-2`}>{t(UI_TEXT.contact.formMessage, lang)}</label>
                   <textarea 
                     id="message"
                     name="message"
@@ -909,7 +919,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                     required
                     rows={4}
                     className={`w-full ${theme.inputBg} border ${theme.inputBorder} rounded-xl px-4 py-3 ${theme.text} focus:outline-none focus:border-uni-yellow focus:ring-1 focus:ring-uni-yellow transition-all resize-none font-medium`}
-                    placeholder="Ceritakan tentang proyek atau kebutuhan Anda..."
+                    placeholder={t(UI_TEXT.contact.formMessagePlaceholder, lang)}
                   ></textarea>
                 </div>
                 
@@ -918,16 +928,16 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                   disabled={formStatus === 'loading'}
                   className="w-full bg-uni-yellow hover:brightness-110 text-uni-black font-black py-4 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-uni-yellow/20"
                 >
-                  {formStatus === 'loading' ? 'Mengirim...' : (
-                    <>Kirim Pesan <Send className="w-4 h-4" /></>
+                  {formStatus === 'loading' ? t(UI_TEXT.contact.formSending, lang) : (
+                    <>{t(UI_TEXT.contact.formSubmit, lang)} <Send className="w-4 h-4" /></>
                   )}
                 </button>
 
                 {formStatus === 'success' && (
-                  <p className="text-emerald-500 font-bold text-sm text-center mt-4">Terima kasih! Pesan Anda telah berhasil dikirim.</p>
+                  <p className="text-emerald-500 font-bold text-sm text-center mt-4">{t(UI_TEXT.contact.formSuccess, lang)}</p>
                 )}
                 {formStatus === 'error' && (
-                  <p className="text-red-500 font-bold text-sm text-center mt-4">Maaf, terjadi kesalahan. Silakan coba lagi.</p>
+                  <p className="text-red-500 font-bold text-sm text-center mt-4">{t(UI_TEXT.contact.formError, lang)}</p>
                 )}
               </form>
             </motion.div>
@@ -941,7 +951,9 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [lang, setLang] = useState<Lang>('id');
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
+  const toggleLang = () => setLang(prev => prev === 'id' ? 'en' : 'id');
 
   const theme = {
     bg: isDarkMode ? 'bg-uni-black' : 'bg-[#F9FAFB]',
@@ -959,17 +971,19 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Layout isDarkMode={isDarkMode} toggleTheme={toggleTheme} theme={theme}>
-        <Routes>
-          <Route path="/" element={<LandingPage isDarkMode={isDarkMode} toggleTheme={toggleTheme} theme={theme} />} />
-          <Route path="/camera" element={<CameraPage isDarkMode={isDarkMode} theme={theme} />} />
-          <Route path="/drone" element={<DronePage isDarkMode={isDarkMode} theme={theme} />} />
-          <Route path="/edit" element={<EditPage isDarkMode={isDarkMode} theme={theme} />} />
-          <Route path="/photography" element={<PhotographyPage isDarkMode={isDarkMode} theme={theme} />} />
-          <Route path="/souvenir" element={<SouvenirPage isDarkMode={isDarkMode} theme={theme} />} />
-          <Route path="/mediakit" element={<MediaKitPage isDarkMode={isDarkMode} theme={theme} />} />
-        </Routes>
-      </Layout>
+      <LangContext.Provider value={{ lang, toggleLang }}>
+        <Layout isDarkMode={isDarkMode} toggleTheme={toggleTheme} theme={theme} lang={lang} toggleLang={toggleLang}>
+          <Routes>
+            <Route path="/" element={<LandingPage isDarkMode={isDarkMode} toggleTheme={toggleTheme} theme={theme} lang={lang} />} />
+            <Route path="/camera" element={<CameraPage isDarkMode={isDarkMode} theme={theme} />} />
+            <Route path="/drone" element={<DronePage isDarkMode={isDarkMode} theme={theme} />} />
+            <Route path="/edit" element={<EditPage isDarkMode={isDarkMode} theme={theme} />} />
+            <Route path="/photography" element={<PhotographyPage isDarkMode={isDarkMode} theme={theme} />} />
+            <Route path="/souvenir" element={<SouvenirPage isDarkMode={isDarkMode} theme={theme} />} />
+            <Route path="/mediakit" element={<MediaKitPage isDarkMode={isDarkMode} theme={theme} lang={lang} />} />
+          </Routes>
+        </Layout>
+      </LangContext.Provider>
     </BrowserRouter>
   );
 }

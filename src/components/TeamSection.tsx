@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { ChevronLeft, ChevronRight, Instagram, Linkedin, Globe, Youtube } from 'lucide-react';
-import { SITE_CONFIG } from '@/constants/config';
+import { SITE_CONFIG, UI_TEXT, t } from '@/constants/config';
+import type { Lang } from '@/constants/config';
 
 // TikTok SVG icon (not available in lucide-react)
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -19,7 +20,7 @@ const socialIconMap: Record<string, { icon: any; label: string }> = {
   tiktok:    { icon: TikTokIcon,  label: 'TikTok' },
 };
 
-const TeamCard = ({ member, position, isMobile, theme, isDarkMode }: any) => {
+const TeamCard = ({ member, position, isMobile, theme, isDarkMode, lang = 'id' }: any) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
@@ -118,7 +119,7 @@ const TeamCard = ({ member, position, isMobile, theme, isDarkMode }: any) => {
         >
           <h4 className={`text-xl font-black mb-3 ${theme.text}`}>{member.name}</h4>
           <p className={`text-[10px] ${theme.textYellow} font-bold tracking-widest uppercase mb-4`}>{member.role}</p>
-          <p className={`text-sm ${theme.textMuted} leading-relaxed mb-6`}>{member.bio}</p>
+          <p className={`text-sm ${theme.textMuted} leading-relaxed mb-6`}>{typeof member.bio === 'object' ? member.bio[lang] || member.bio.id : member.bio}</p>
           
           {/* Dynamic Social Icons */}
           {activeSocials.length > 0 && (
@@ -149,7 +150,7 @@ const TeamCard = ({ member, position, isMobile, theme, isDarkMode }: any) => {
   );
 };
 
-const TeamSection = ({ theme, isDarkMode }: any) => {
+const TeamSection = ({ theme, isDarkMode, lang = 'id' as Lang }: any) => {
   const team = SITE_CONFIG.team;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -185,14 +186,14 @@ const TeamSection = ({ theme, isDarkMode }: any) => {
     <section className={`py-24 px-6 relative overflow-hidden ${theme.sectionBg} border-t ${theme.border} transition-colors duration-500`}>
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-6 md:mb-10">
-          <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-3`}>Our Team</h2>
-          <h3 className="text-4xl md:text-5xl font-black mb-10">Mengenal Anggota Kami Lebih Dekat</h3>
+          <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-3`}>{t(UI_TEXT.team.label, lang)}</h2>
+          <h3 className="text-4xl md:text-5xl font-black mb-10">{t(UI_TEXT.team.heading, lang)}</h3>
           <motion.p
             animate={{ scale: [1, 1.05, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className={`text-sm font-bold ${theme.textMuted}`}
+            className={`text-base font-bold ${theme.textMuted}`}
           >
-            klik kartu untuk lihat detail
+            {t(UI_TEXT.team.hint, lang)}
           </motion.p>
         </div>
 
@@ -234,6 +235,7 @@ const TeamSection = ({ theme, isDarkMode }: any) => {
                 isMobile={isMobile}
                 theme={theme}
                 isDarkMode={isDarkMode}
+                lang={lang}
               />
             ))}
             </motion.div>

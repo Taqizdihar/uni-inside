@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Download, Mail, Users, Target, ExternalLink, MessageCircle, Instagram, Youtube, Linkedin, Facebook } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
-import { SITE_CONFIG } from '@/constants/config';
+import { SITE_CONFIG, UI_TEXT, t } from '@/constants/config';
+import type { Lang } from '@/constants/config';
 import logoDark from '../assets/logo/dark.png';
 import logoNormal from '../assets/logo/normal.png';
 
@@ -28,7 +29,7 @@ const PLATFORM_ICONS: Record<string, any> = {
   twitter: XIcon
 };
 
-const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }) => {
+const MediaKitPage = ({ isDarkMode, theme, lang = 'id' as Lang }: { isDarkMode: boolean, theme: any, lang?: Lang }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -102,9 +103,9 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
 
           <motion.div variants={fadeInUp} className={`max-w-2xl mx-auto ${theme.cardBg} border ${theme.border} backdrop-blur-xl rounded-3xl p-10 ${isDarkMode ? 'shadow-[0_0_40px_rgba(250,208,44,0.05)]' : 'shadow-xl shadow-black/5'}`}>
             <div className={`text-5xl md:text-7xl font-black ${theme.textYellow} mb-4`}>{SITE_CONFIG.mediaKit.totalFollowers}</div>
-            <div className="text-2xl font-bold mb-2">Total Pengikut</div>
+            <div className="text-2xl font-bold mb-2">{t(UI_TEXT.mediaKit.totalFollowers, lang)}</div>
             <p className={`${theme.textMuted} leading-relaxed`}>
-              {SITE_CONFIG.mediaKit.growthDescription}
+              {typeof SITE_CONFIG.mediaKit.growthDescription === 'object' ? t(SITE_CONFIG.mediaKit.growthDescription, lang) : SITE_CONFIG.mediaKit.growthDescription}
             </p>
           </motion.div>
         </motion.section>
@@ -118,7 +119,7 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
           className="mb-32"
         >
           <motion.div variants={fadeInUp} className="text-center mb-12">
-            <h2 className="text-2xl font-black">Jangkauan Sosial Media</h2>
+            <h2 className="text-2xl font-black">{t(UI_TEXT.mediaKit.socialReach, lang)}</h2>
           </motion.div>
           
           <div className="flex flex-wrap justify-center gap-6">
@@ -146,7 +147,7 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
                   <ExternalLink className={`w-4 h-4 ${theme.textMuted} group-hover:${theme.textYellow} transition-colors`} />
                 </div>
                 <h4 className="text-3xl font-black mb-1">{social.followers}</h4>
-                <div className="font-bold mb-1">Pengikut {social.platform}</div>
+                <div className="font-bold mb-1">{t(UI_TEXT.mediaKit.followersLabel, lang)} {social.platform}</div>
                 <div className={`text-sm ${theme.textMuted}`}>{social.handle}</div>
               </motion.a>
             ))}
@@ -162,12 +163,12 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
           className="mb-32 grid lg:grid-cols-2 gap-16 items-center"
         >
           <motion.div variants={fadeInUp}>
-            <h3 className={`${theme.textYellow} text-sm font-bold tracking-widest uppercase mb-4`}>Tentang Kami</h3>
+            <h3 className={`${theme.textYellow} text-sm font-bold tracking-widest uppercase mb-4`}>{t(UI_TEXT.mediaKit.aboutLabel, lang)}</h3>
             <h2 className="text-4xl md:text-5xl font-black leading-tight mb-6">
-              Inti Kreatif Telkom University
+              {t(UI_TEXT.mediaKit.aboutHeading, lang)}
             </h2>
             <p className={`text-lg ${theme.textMuted} leading-relaxed mb-8`}>
-              Uni-Inside adalah mesin budaya yang digerakkan oleh Telkom University, menjembatani kesenjangan antara inovasi kampus dan keunggulan komersial. Kami tidak hanya mengikuti tren — kami menciptakannya dengan memahami apa yang benar-benar diinginkan generasi berikutnya.
+              {t(UI_TEXT.mediaKit.aboutDescription, lang)}
             </p>
           </motion.div>
 
@@ -177,8 +178,8 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
                 <Users className={`w-6 h-6 ${theme.textYellow}`} />
               </div>
               <div>
-                <h4 className="text-xl font-bold mb-2">Perspektif Generasi Baru</h4>
-                <p className={theme.textMuted}>Berbicara dalam bahasa Gen-Z dengan storytelling autentik dan dampak visual yang kuat.</p>
+                <h4 className="text-xl font-bold mb-2">{t(UI_TEXT.mediaKit.featureGen.title, lang)}</h4>
+                <p className={theme.textMuted}>{t(UI_TEXT.mediaKit.featureGen.desc, lang)}</p>
               </div>
             </motion.div>
             
@@ -187,8 +188,8 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
                 <Target className={`w-6 h-6 ${theme.textYellow}`} />
               </div>
               <div>
-                <h4 className="text-xl font-bold mb-2">Strategi Digital-First</h4>
-                <p className={theme.textMuted}>Kampanye yang dirancang untuk dialami secara mulus di seluruh platform digital modern.</p>
+                <h4 className="text-xl font-bold mb-2">{t(UI_TEXT.mediaKit.featureDigital.title, lang)}</h4>
+                <p className={theme.textMuted}>{t(UI_TEXT.mediaKit.featureDigital.desc, lang)}</p>
               </div>
             </motion.div>
           </motion.div>
@@ -203,7 +204,7 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
           className="mb-32"
         >
           <motion.div variants={fadeInUp} className="text-center mb-12">
-            <h2 className="text-2xl font-black">Partner Kami</h2>
+            <h2 className="text-2xl font-black">{t(UI_TEXT.mediaKit.partnersHeading, lang)}</h2>
           </motion.div>
           
           <div className="flex flex-wrap justify-center gap-6">
@@ -236,7 +237,7 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
                   )}
                 </div>
                 <h4 className={`text-xl font-bold mb-2 group-hover:${theme.textYellow} transition-colors`}>{partner.name}</h4>
-                <p className={`text-sm ${theme.textMuted} leading-relaxed`}>{partner.description}</p>
+                <p className={`text-sm ${theme.textMuted} leading-relaxed`}>{typeof partner.description === 'object' ? t(partner.description, lang) : partner.description}</p>
               </motion.a>
             ))}
           </div>
@@ -254,14 +255,14 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
           
           <motion.div variants={fadeInUp} className="relative z-10">
             <h2 className="text-4xl md:text-5xl font-black mb-10">
-              Mulai Berkolaborasi
+              {t(UI_TEXT.mediaKit.ctaHeading, lang)}
             </h2>
             <div className="flex flex-wrap justify-center gap-5">
               <button 
                 onClick={() => window.open(`https://wa.me/${SITE_CONFIG.brand.whatsapp}`, '_blank')}
                 className={`px-8 py-4 rounded-full ${isDarkMode ? 'bg-white/10 hover:bg-white/20 border-white/20' : 'bg-black/5 hover:bg-black/10 border-black/10'} font-bold border transition-all flex items-center gap-2`}
               >
-                <MessageCircle className="w-5 h-5" /> Hubungi Kami
+                <MessageCircle className="w-5 h-5" /> {t(UI_TEXT.mediaKit.ctaButton, lang)}
               </button>
             </div>
           </motion.div>
