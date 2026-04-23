@@ -32,16 +32,16 @@ const TeamCard = ({ member, position, isMobile, theme, isDarkMode }: any) => {
 
   if (position === 'center') {
     animateProps = { x: 0, scale: 1, opacity: 1, zIndex: 30 };
-    hoverProps = { scale: 1.05 };
+    hoverProps = { scale: 1.02 }; // Subtle hover
   } else if (position === 'left') {
-    animateProps = { x: isMobile ? -140 : -280, scale: 0.8, opacity: 0.5, zIndex: 20 };
+    animateProps = { x: isMobile ? -110 : -240, scale: 0.8, opacity: 0.5, zIndex: 20 };
   } else if (position === 'right') {
-    animateProps = { x: isMobile ? 140 : 280, scale: 0.8, opacity: 0.5, zIndex: 20 };
+    animateProps = { x: isMobile ? 110 : 240, scale: 0.8, opacity: 0.5, zIndex: 20 };
   }
 
   return (
     <motion.div
-      className={`absolute top-0 bottom-0 m-auto w-80 h-[480px] ${position === 'center' ? 'cursor-pointer' : ''}`}
+      className={`absolute top-0 bottom-0 m-auto w-[280px] h-[350px] md:w-[320px] md:h-[400px] ${position === 'center' ? 'cursor-pointer' : ''}`}
       style={{ perspective: 1000 }}
       animate={animateProps}
       whileHover={hoverProps}
@@ -57,10 +57,11 @@ const TeamCard = ({ member, position, isMobile, theme, isDarkMode }: any) => {
       >
         {/* Front Side */}
         <div 
-          className={`absolute inset-0 ${theme.cardBg} border ${theme.border} rounded-3xl overflow-hidden backdrop-blur-xl flex flex-col ${position === 'center' && isDarkMode ? 'shadow-[0_0_30px_rgba(250,208,44,0.1)]' : position === 'center' ? 'shadow-xl' : ''}`} 
+          className={`absolute inset-0 ${theme.cardBg} border ${theme.border} rounded-3xl overflow-hidden flex flex-col ${position === 'center' && isDarkMode ? 'shadow-[0_0_20px_rgba(255,255,255,0.05)]' : position === 'center' ? 'shadow-lg' : ''}`} 
           style={{ backfaceVisibility: 'hidden' }}
         >
-          <div className="w-full h-2/3 relative bg-gray-200 overflow-hidden">
+          {/* Image Container */}
+          <div className="w-full flex-1 relative bg-gray-200 overflow-hidden">
              <img 
                src={getImageUrl(member.image)} 
                alt={member.name}
@@ -74,11 +75,12 @@ const TeamCard = ({ member, position, isMobile, theme, isDarkMode }: any) => {
                  }
                }}
              />
-             <div className={`absolute inset-0 bg-gradient-to-t ${isDarkMode ? 'from-[#1a1a1a]' : 'from-white'} to-transparent opacity-90`} />
           </div>
-          <div className="absolute bottom-0 left-0 right-0 p-6 text-center z-10">
-            <h4 className="text-xl font-black mb-1">{member.name}</h4>
-            <p className={`text-sm ${theme.textYellow} font-bold tracking-widest uppercase`}>{member.role}</p>
+          
+          {/* Info Container */}
+          <div className={`p-4 text-center shrink-0 ${theme.cardBg} border-t ${theme.border} flex flex-col justify-center`}>
+            <h4 className={`text-lg font-black mb-0.5 ${theme.text}`}>{member.name}</h4>
+            <p className={`text-xs ${theme.textYellow} font-bold tracking-widest uppercase`}>{member.role}</p>
           </div>
         </div>
 
