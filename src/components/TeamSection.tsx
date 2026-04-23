@@ -1,7 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Instagram, Linkedin, Globe, Youtube } from 'lucide-react';
 import { SITE_CONFIG } from '@/constants/config';
+
+// TikTok SVG icon (not available in lucide-react)
+const TikTokIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+  </svg>
+);
+
+// Social media icon mapping
+const socialIconMap: Record<string, { icon: any; label: string }> = {
+  linkedin:  { icon: Linkedin,    label: 'LinkedIn' },
+  website:   { icon: Globe,       label: 'Website' },
+  instagram: { icon: Instagram,   label: 'Instagram' },
+  youtube:   { icon: Youtube,     label: 'YouTube' },
+  tiktok:    { icon: TikTokIcon,  label: 'TikTok' },
+};
 
 const TeamCard = ({ member, position, isMobile, theme, isDarkMode }: any) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -32,17 +48,22 @@ const TeamCard = ({ member, position, isMobile, theme, isDarkMode }: any) => {
 
   if (position === 'center') {
     animateProps = { x: 0, scale: 1, opacity: 1, zIndex: 30 };
-    hoverProps = { scale: 1.02 }; // Subtle hover
+    hoverProps = { scale: 1.02 };
   } else if (position === 'left') {
     animateProps = { x: isMobile ? -110 : -240, scale: 0.8, opacity: 0.5, zIndex: 20 };
   } else if (position === 'right') {
     animateProps = { x: isMobile ? 110 : 240, scale: 0.8, opacity: 0.5, zIndex: 20 };
   }
 
+  // Filter socials to only those with a URL
+  const activeSocials = member.socials
+    ? Object.entries(member.socials).filter(([_, url]) => url)
+    : [];
+
   return (
     <motion.div
-      className={`absolute top-0 bottom-0 m-auto w-[280px] h-[350px] md:w-[320px] md:h-[400px] ${position === 'center' ? 'cursor-pointer' : ''}`}
-      style={{ perspective: 1000 }}
+      className={`absolute top-0 bottom-0 m-auto ${position === 'center' ? 'cursor-pointer' : ''}`}
+      style={{ perspective: 1000, width: isMobile ? 240 : 280 }}
       animate={animateProps}
       whileHover={hoverProps}
       transition={{ duration: 0.6, type: "spring", stiffness: 300, damping: 30 }}
@@ -57,11 +78,11 @@ const TeamCard = ({ member, position, isMobile, theme, isDarkMode }: any) => {
       >
         {/* Front Side */}
         <div 
-          className={`absolute inset-0 ${theme.cardBg} border ${theme.border} rounded-3xl overflow-hidden flex flex-col ${position === 'center' && isDarkMode ? 'shadow-[0_0_20px_rgba(255,255,255,0.05)]' : position === 'center' ? 'shadow-lg' : ''}`} 
+          className={`absolute inset-0 rounded-3xl overflow-hidden flex flex-col border ${theme.border} ${position === 'center' && isDarkMode ? 'shadow-[0_0_20px_rgba(255,255,255,0.05)]' : position === 'center' ? 'shadow-lg' : ''}`} 
           style={{ backfaceVisibility: 'hidden' }}
         >
-          {/* Image Container */}
-          <div className="w-full flex-1 relative bg-gray-200 overflow-hidden">
+          {/* Image Container — strict 4:5 aspect ratio */}
+          <div className="w-full aspect-[4/5] relative overflow-hidden bg-gray-200 shrink-0">
              <img 
                src={getImageUrl(member.image)} 
                alt={member.name}
@@ -77,20 +98,45 @@ const TeamCard = ({ member, position, isMobile, theme, isDarkMode }: any) => {
              />
           </div>
           
-          {/* Info Container */}
-          <div className={`p-4 text-center shrink-0 ${theme.cardBg} border-t ${theme.border} flex flex-col justify-center`}>
-            <h4 className={`text-lg font-black mb-0.5 ${theme.text}`}>{member.name}</h4>
-            <p className={`text-xs ${theme.textYellow} font-bold tracking-widest uppercase`}>{member.role}</p>
+          {/* Info Container — solid background, outside the image frame */}
+          <div className={`px-4 py-3 text-center shrink-0 ${isDarkMode ? 'bg-[#1a1a1a]' : 'bg-white'} border-t ${theme.border}`}>
+            <h4 className={`text-xl font-black leading-tight mb-0.5 ${theme.text}`}>{member.name}</h4>
+            <p className={`text-[10px] ${theme.textYellow} font-bold tracking-widest uppercase leading-snug`}>{member.role}</p>
           </div>
         </div>
 
         {/* Back Side */}
         <div 
-          className={`absolute inset-0 ${theme.cardBg} border ${theme.border} rounded-3xl p-6 backdrop-blur-xl flex flex-col items-center justify-center text-center`} 
+          className={`absolute inset-0 rounded-3xl border ${theme.border} p-6 flex flex-col items-center justify-center text-center ${isDarkMode ? 'bg-[#1a1a1a]' : 'bg-white'}`} 
           style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
         >
-          <h4 className="text-lg font-black mb-4">Profil</h4>
-          <p className={`text-sm ${theme.textMuted} leading-relaxed`}>{member.bio}</p>
+          <h4 className={`text-xl font-black mb-3 ${theme.text}`}>{member.name}</h4>
+          <p className={`text-[10px] ${theme.textYellow} font-bold tracking-widest uppercase mb-4`}>{member.role}</p>
+          <p className={`text-sm ${theme.textMuted} leading-relaxed mb-6`}>{member.bio}</p>
+          
+          {/* Dynamic Social Icons */}
+          {activeSocials.length > 0 && (
+            <div className="flex items-center gap-3 mt-auto">
+              {activeSocials.map(([platform, url]) => {
+                const socialInfo = socialIconMap[platform];
+                if (!socialInfo) return null;
+                const IconComponent = socialInfo.icon;
+                return (
+                  <a
+                    key={platform}
+                    href={url as string}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className={`w-9 h-9 rounded-full ${isDarkMode ? 'bg-white/10 hover:bg-white/20' : 'bg-black/5 hover:bg-black/10'} flex items-center justify-center ${theme.textMuted} hover:${theme.textYellow} transition-colors`}
+                    title={socialInfo.label}
+                  >
+                    <IconComponent className="w-4 h-4" />
+                  </a>
+                );
+              })}
+            </div>
+          )}
         </div>
       </motion.div>
     </motion.div>
@@ -104,7 +150,7 @@ const TeamSection = ({ theme, isDarkMode }: any) => {
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile(); // Check on initial mount
+    checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
@@ -134,7 +180,7 @@ const TeamSection = ({ theme, isDarkMode }: any) => {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16 md:mb-24">
           <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-3`}>Our Team</h2>
-          <h3 className="text-4xl md:text-5xl font-black">Tim Kami.</h3>
+          <h3 className="text-4xl md:text-5xl font-black">Mengenal anggota kami lebih dekat.</h3>
         </div>
 
         <div className="relative w-full h-[500px] flex items-center justify-center">
@@ -159,7 +205,7 @@ const TeamSection = ({ theme, isDarkMode }: any) => {
           </div>
 
           {/* Stacked Carousel */}
-          <div className="relative w-full h-full flex justify-center perspective-1000">
+          <div className="relative w-full h-full flex justify-center">
             {team.map((member, i) => (
               <TeamCard 
                 key={member.id} 
