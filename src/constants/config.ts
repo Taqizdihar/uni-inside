@@ -10,30 +10,45 @@ export const SITE_CONFIG = {
       line2: "Fakultas Ilmu Terapan, Telkom University",
       line3: "Jl. Telekomunikasi No.1, Sukapura, Kec. Dayeuhkolot, Kabupaten Bandung, Jawa Barat 40257",
       mapsLink: "https://maps.app.goo.gl/uuckDPXqEHUtw1pQA"
-    }
+    },
+    categories: ["Campus Media", "Creative Space", "Digital Marketing"]
   },
-  socials: {
-    instagram: {
+  socials: [
+    {
+      platform: "Instagram",
       handle: "@uniinside.studio",
       followers: "2.4K",
-      link: "https://www.instagram.com/uniinside.studio?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-      growth: "+124%"
+      link: "https://www.instagram.com/uniinside.studio?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
     },
-    tiktok: {
+    {
+      platform: "TikTok",
       handle: "@uniinside",
       followers: "1.8K",
-      link: "https://www.tiktok.com/@uniinside.studio?is_from_webapp=1&sender_device=pc",
-      growth: "+85%"
+      link: "https://www.tiktok.com/@uniinside.studio?is_from_webapp=1&sender_device=pc"
     },
-    youtube: {
-      name: "Uni-Inside Official",
+    {
+      platform: "YouTube",
+      handle: "Uni-Inside Official",
       followers: "0.8K",
-      link: "#",
-      growth: "+42%"
+      link: "#"
     }
-  },
+  ],
+  partners: [
+    {
+      name: "Telkom University",
+      logo: "TU",
+      description: "Universitas digital terkemuka di Indonesia, pusat inovasi dan kreativitas kampus.",
+      link: "https://telkomuniversity.ac.id"
+    },
+    {
+      name: "BEM FIT",
+      logo: "BF",
+      description: "Badan Eksekutif Mahasiswa Fakultas Ilmu Terapan, mitra kolaborasi acara dan konten kampus.",
+      link: "#"
+    }
+  ],
   mediaKit: {
     totalFollowers: "5.0k+",
-    growthDescription: "Organically grown audience representing the active and engaged demographic across Telkom University and beyond."
+    growthDescription: "Audiens yang tumbuh secara organik, mewakili demografi aktif dan engaged di lingkungan Telkom University dan sekitarnya."
   }
 };

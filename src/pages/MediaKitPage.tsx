@@ -1,7 +1,16 @@
 import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Download, Mail, TrendingUp, Users, Target } from 'lucide-react';
+import { Download, Mail, Users, Target, ExternalLink } from 'lucide-react';
 import { SITE_CONFIG } from '@/constants/config';
+
+const PLATFORM_ICONS: Record<string, string> = {
+  Instagram: "IG",
+  TikTok: "TK",
+  YouTube: "YT",
+  Twitter: "TW",
+  LinkedIn: "LI",
+  Facebook: "FB"
+};
 
 const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }) => {
   useEffect(() => {
@@ -10,15 +19,21 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
   };
 
   const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2 }
+      transition: { staggerChildren: 0.15 }
     }
+  };
+
+  const cardHover = {
+    y: -6,
+    boxShadow: "0 20px 40px rgba(250, 208, 44, 0.08)",
+    transition: { duration: 0.3, ease: "easeOut" }
   };
 
   return (
@@ -39,9 +54,12 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
           variants={staggerContainer}
           className="text-center mb-32"
         >
-          <motion.div variants={fadeInUp} className="flex justify-center gap-3 mb-6">
-            <span className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-xs font-bold tracking-widest text-[#FAD02C]">MEDIA</span>
-            <span className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-xs font-bold tracking-widest text-[#FAD02C]">CAMPUS INNOVATION</span>
+          <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-3 mb-6">
+            {SITE_CONFIG.brand.categories.map((cat, i) => (
+              <span key={i} className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-xs font-bold tracking-widest text-[#FAD02C]">
+                {cat.toUpperCase()}
+              </span>
+            ))}
           </motion.div>
           
           <motion.h1 variants={fadeInUp} className="text-6xl md:text-8xl font-black tracking-tighter mb-4">
@@ -52,110 +70,15 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
           </motion.h2>
 
           <motion.div variants={fadeInUp} className="max-w-2xl mx-auto bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-10 shadow-[0_0_40px_rgba(250,208,44,0.05)]">
-            <h3 className="text-sm font-bold tracking-widest text-white/50 uppercase mb-2">Impact Counter</h3>
             <div className="text-5xl md:text-7xl font-black text-[#FAD02C] mb-4">{SITE_CONFIG.mediaKit.totalFollowers}</div>
-            <div className="text-2xl font-bold mb-2">Total Followers</div>
+            <div className="text-2xl font-bold mb-2">Total Pengikut</div>
             <p className="text-white/60 leading-relaxed">
               {SITE_CONFIG.mediaKit.growthDescription}
             </p>
           </motion.div>
         </motion.section>
 
-        {/* B. Social Reach Grid */}
-        <motion.section 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-          className="mb-32"
-        >
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { 
-                platform: "Instagram", 
-                handle: SITE_CONFIG.socials.instagram.handle, 
-                followers: SITE_CONFIG.socials.instagram.followers, 
-                icon: "IG", 
-                growth: SITE_CONFIG.socials.instagram.growth 
-              },
-              { 
-                platform: "TikTok", 
-                handle: SITE_CONFIG.socials.tiktok.handle, 
-                followers: SITE_CONFIG.socials.tiktok.followers, 
-                icon: "TK", 
-                growth: SITE_CONFIG.socials.tiktok.growth 
-              },
-              { 
-                platform: "YouTube", 
-                handle: SITE_CONFIG.socials.youtube.name, 
-                followers: SITE_CONFIG.socials.youtube.followers, 
-                icon: "YT", 
-                growth: SITE_CONFIG.socials.youtube.growth 
-              }
-            ].map((social, i) => (
-              <motion.div 
-                key={i} 
-                variants={fadeInUp}
-                className="bg-white/5 border border-white/10 backdrop-blur-md p-8 rounded-3xl hover:bg-white/10 transition-colors group"
-              >
-                <div className="flex justify-between items-start mb-8">
-                  <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center font-black text-[#FAD02C]">
-                    {social.icon}
-                  </div>
-                  <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAD02C]/10 text-[#FAD02C] text-sm font-bold border border-[#FAD02C]/20">
-                    <TrendingUp className="w-4 h-4" /> {social.growth}
-                  </div>
-                </div>
-                <h4 className="text-3xl font-black mb-1">{social.followers}</h4>
-                <div className="font-bold text-white/80 mb-1">{social.platform} Followers</div>
-                <div className="text-sm text-white/50">{social.handle}</div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* C. Who We Are Section */}
-        <motion.section 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-          className="mb-32 grid lg:grid-cols-2 gap-16 items-center"
-        >
-          <motion.div variants={fadeInUp}>
-            <h3 className="text-[#FAD02C] text-sm font-bold tracking-widest uppercase mb-4">Who We Are</h3>
-            <h2 className="text-4xl md:text-5xl font-black leading-tight mb-6">
-              The Telkom University Creative Core
-            </h2>
-            <p className="text-lg text-white/70 leading-relaxed mb-8">
-              Uni-Inside is a cultural engine fueled by Telkom University, bridging the gap between campus innovation and commercial excellence. We don't just follow trends; we create them by understanding what the next generation truly wants.
-            </p>
-          </motion.div>
-
-          <motion.div variants={staggerContainer} className="space-y-6">
-            <motion.div variants={fadeInUp} className="bg-white/5 border border-white/10 backdrop-blur-md p-6 rounded-2xl flex gap-5">
-              <div className="w-12 h-12 rounded-full bg-[#FAD02C]/10 flex items-center justify-center shrink-0">
-                <Users className="w-6 h-6 text-[#FAD02C]" />
-              </div>
-              <div>
-                <h4 className="text-xl font-bold mb-2">Next-Gen Perspective</h4>
-                <p className="text-white/60">Speaking the language of Gen-Z with authentic storytelling and visual impact.</p>
-              </div>
-            </motion.div>
-            
-            <motion.div variants={fadeInUp} className="bg-white/5 border border-white/10 backdrop-blur-md p-6 rounded-2xl flex gap-5">
-              <div className="w-12 h-12 rounded-full bg-[#FAD02C]/10 flex items-center justify-center shrink-0">
-                <Target className="w-6 h-6 text-[#FAD02C]" />
-              </div>
-              <div>
-                <h4 className="text-xl font-bold mb-2">Digital-First Strategy</h4>
-                <p className="text-white/60">Campaigns designed to be experienced seamlessly across all modern digital platforms.</p>
-              </div>
-            </motion.div>
-          </motion.div>
-        </motion.section>
-
-        {/* D. Global Partnerships */}
+        {/* B. Jangkauan Sosial Media */}
         <motion.section 
           initial="hidden"
           whileInView="visible"
@@ -164,19 +87,115 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
           className="mb-32"
         >
           <motion.div variants={fadeInUp} className="text-center mb-12">
-            <h2 className="text-2xl font-black text-white/80">Global Partnerships</h2>
+            <h2 className="text-2xl font-black text-white/80">Jangkauan Sosial Media</h2>
           </motion.div>
           
-          <motion.div variants={fadeInUp} className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {["Telkom Univ", "Spotify Indo", "Gojek", "Tokopedia"].map((partner, i) => (
-              <div key={i} className="aspect-[3/2] bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center group hover:bg-white/10 transition-colors">
-                <span className="text-xl font-bold text-white/30 group-hover:text-white/70 transition-colors">{partner}</span>
-              </div>
+          <div className="flex flex-wrap justify-center gap-6">
+            {SITE_CONFIG.socials.map((social, i) => (
+              <motion.a
+                key={i}
+                href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                variants={fadeInUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                whileHover={cardHover}
+                className="bg-white/5 border border-white/10 backdrop-blur-md p-8 rounded-3xl hover:bg-white/8 transition-colors group w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] min-w-[280px]"
+              >
+                <div className="flex justify-between items-start mb-8">
+                  <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center font-black text-[#FAD02C] group-hover:bg-[#FAD02C]/10 transition-colors">
+                    {PLATFORM_ICONS[social.platform] || social.platform.substring(0, 2).toUpperCase()}
+                  </div>
+                  <ExternalLink className="w-4 h-4 text-white/20 group-hover:text-[#FAD02C] transition-colors" />
+                </div>
+                <h4 className="text-3xl font-black mb-1">{social.followers}</h4>
+                <div className="font-bold text-white/80 mb-1">Pengikut {social.platform}</div>
+                <div className="text-sm text-white/50">{social.handle}</div>
+              </motion.a>
             ))}
+          </div>
+        </motion.section>
+
+        {/* C. Tentang Kami */}
+        <motion.section 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="mb-32 grid lg:grid-cols-2 gap-16 items-center"
+        >
+          <motion.div variants={fadeInUp}>
+            <h3 className="text-[#FAD02C] text-sm font-bold tracking-widest uppercase mb-4">Tentang Kami</h3>
+            <h2 className="text-4xl md:text-5xl font-black leading-tight mb-6">
+              Inti Kreatif Telkom University
+            </h2>
+            <p className="text-lg text-white/70 leading-relaxed mb-8">
+              Uni-Inside adalah mesin budaya yang digerakkan oleh Telkom University, menjembatani kesenjangan antara inovasi kampus dan keunggulan komersial. Kami tidak hanya mengikuti tren — kami menciptakannya dengan memahami apa yang benar-benar diinginkan generasi berikutnya.
+            </p>
+          </motion.div>
+
+          <motion.div variants={staggerContainer} className="space-y-6">
+            <motion.div variants={fadeInUp} whileHover={cardHover} className="bg-white/5 border border-white/10 backdrop-blur-md p-6 rounded-2xl flex gap-5">
+              <div className="w-12 h-12 rounded-full bg-[#FAD02C]/10 flex items-center justify-center shrink-0">
+                <Users className="w-6 h-6 text-[#FAD02C]" />
+              </div>
+              <div>
+                <h4 className="text-xl font-bold mb-2">Perspektif Generasi Baru</h4>
+                <p className="text-white/60">Berbicara dalam bahasa Gen-Z dengan storytelling autentik dan dampak visual yang kuat.</p>
+              </div>
+            </motion.div>
+            
+            <motion.div variants={fadeInUp} whileHover={cardHover} className="bg-white/5 border border-white/10 backdrop-blur-md p-6 rounded-2xl flex gap-5">
+              <div className="w-12 h-12 rounded-full bg-[#FAD02C]/10 flex items-center justify-center shrink-0">
+                <Target className="w-6 h-6 text-[#FAD02C]" />
+              </div>
+              <div>
+                <h4 className="text-xl font-bold mb-2">Strategi Digital-First</h4>
+                <p className="text-white/60">Kampanye yang dirancang untuk dialami secara mulus di seluruh platform digital modern.</p>
+              </div>
+            </motion.div>
           </motion.div>
         </motion.section>
 
-        {/* E. Final Call-to-Action */}
+        {/* D. Partner Kami */}
+        <motion.section 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="mb-32"
+        >
+          <motion.div variants={fadeInUp} className="text-center mb-12">
+            <h2 className="text-2xl font-black text-white/80">Partner Kami</h2>
+          </motion.div>
+          
+          <div className="flex flex-wrap justify-center gap-6">
+            {SITE_CONFIG.partners.map((partner, i) => (
+              <motion.a
+                key={i}
+                href={partner.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                variants={fadeInUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                whileHover={cardHover}
+                className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl p-8 group hover:bg-white/8 transition-colors w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] min-w-[280px]"
+              >
+                <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center font-black text-2xl text-[#FAD02C] mb-5 group-hover:bg-[#FAD02C]/10 transition-colors">
+                  {partner.logo}
+                </div>
+                <h4 className="text-xl font-bold mb-2 group-hover:text-[#FAD02C] transition-colors">{partner.name}</h4>
+                <p className="text-sm text-white/50 leading-relaxed">{partner.description}</p>
+              </motion.a>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* E. Ajakan Bertindak */}
         <motion.section 
           initial="hidden"
           whileInView="visible"
@@ -188,17 +207,17 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
           
           <motion.div variants={fadeInUp} className="relative z-10">
             <h2 className="text-4xl md:text-5xl font-black mb-10">
-              Ready to reach the<br/>next generation?
+              Siap menjangkau<br/>generasi berikutnya?
             </h2>
             <div className="flex flex-wrap justify-center gap-5">
               <button className="px-8 py-4 rounded-full bg-[#FAD02C] text-[#202121] font-bold hover:brightness-110 transition-all flex items-center gap-2 shadow-[0_0_30px_rgba(250,208,44,0.3)]">
-                <Download className="w-5 h-5" /> Download Kit (PDF)
+                <Download className="w-5 h-5" /> Unduh Media Kit (PDF)
               </button>
               <button 
                 onClick={() => window.location.href = `mailto:${SITE_CONFIG.brand.email}`}
                 className="px-8 py-4 rounded-full bg-white/10 text-white font-bold hover:bg-white/20 border border-white/20 transition-all flex items-center gap-2"
               >
-                <Mail className="w-5 h-5" /> Get in Touch
+                <Mail className="w-5 h-5" /> Hubungi Kami
               </button>
             </div>
           </motion.div>
