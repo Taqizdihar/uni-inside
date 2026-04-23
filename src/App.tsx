@@ -563,12 +563,13 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
             <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-3`}>Our Products & Services</h2>
             <h3 className="text-4xl md:text-5xl font-black max-w-2xl mb-12">Layanan Kreatif yang Kami Tawarkan untuk Anda</h3>
             
-            {/* Produk Aplikasi Kami - Full Width Style Container */}
-            <div className="relative -mx-6 px-6 py-16 mb-20 overflow-hidden">
-              {/* Subtle background for the app section to make it feel "full width" even if inside the main section */}
+            {/* Produk Aplikasi Kami - Full-Width Section Divider Bar */}
+            <div className="relative left-1/2 -translate-x-1/2 w-screen py-16 mb-20 overflow-hidden">
+              {/* Divider Background Bar */}
               <div className={`absolute inset-0 ${isDarkMode ? 'bg-white/[0.02]' : 'bg-black/[0.02]'} border-y ${theme.border}`} />
               
-              <div className="relative z-10">
+              {/* Centered Content within Full-Width Bar */}
+              <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <h4 className={`text-2xl md:text-3xl font-black mb-8 text-center md:text-left ${isDarkMode ? 'text-white' : 'text-uni-black'}`}>
                   Produk Aplikasi Kami
                 </h4>
@@ -577,20 +578,20 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                   {/* UNI-VERSE Card */}
                   <motion.div
                     whileHover={{ y: -5, scale: 1.01 }}
-                    className={`${theme.cardBg} backdrop-blur-xl border ${theme.border} rounded-3xl p-10 flex items-center justify-center h-48 md:h-56 group transition-all duration-300 relative overflow-hidden`}
+                    className={`${theme.cardBg} backdrop-blur-xl border ${theme.border} rounded-3xl p-6 md:p-8 flex items-center justify-start h-36 md:h-44 group transition-all duration-300 relative overflow-hidden`}
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-uni-yellow/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     <img 
                       src={universeLogo} 
                       alt="UNI-VERSE" 
-                      className="max-h-24 md:max-h-28 w-auto object-contain transition-transform duration-500 group-hover:scale-110 relative z-10"
+                      className="max-h-24 md:max-h-32 w-auto object-contain transition-transform duration-500 group-hover:scale-105 relative z-10"
                     />
                   </motion.div>
 
                   {/* UNI-AISEO Card */}
                   <motion.div
                     whileHover={{ y: -5, scale: 1.01 }}
-                    className={`${theme.cardBg} backdrop-blur-xl border ${theme.border} rounded-3xl p-10 flex items-center justify-center h-48 md:h-56 group transition-all duration-300 relative overflow-hidden`}
+                    className={`${theme.cardBg} backdrop-blur-xl border ${theme.border} rounded-3xl p-6 md:p-8 flex items-center justify-start h-36 md:h-44 group transition-all duration-300 relative overflow-hidden`}
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-uni-yellow/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     <AnimatePresence mode="wait">
@@ -602,7 +603,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 1.1 }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                        className="max-h-24 md:max-h-28 w-auto object-contain transition-transform duration-500 group-hover:scale-110 relative z-10"
+                        className="max-h-24 md:max-h-32 w-auto object-contain transition-transform duration-500 group-hover:scale-105 relative z-10"
                       />
                     </AnimatePresence>
                   </motion.div>

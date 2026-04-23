@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, Video, Shield, Zap, Clock, CheckCircle2 } from 'lucide-react';
+import { SITE_CONFIG } from '@/constants/config';
 import { Link } from 'react-router-dom';
 
 const DronePage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }) => {
@@ -27,7 +28,12 @@ const DronePage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }) =
                 Sewa drone untuk dokumentasi video cinematic yang memukau. Kami menyediakan drone dengan kamera 4K dan fitur stabilisasi terbaik untuk hasil yang profesional.
               </p>
               <div className="flex flex-wrap gap-4">
-                <a href="#contact" className="px-8 py-4 rounded-full bg-uni-yellow text-uni-black font-bold hover:brightness-110 transition-all shadow-lg shadow-uni-yellow/20">
+                <a 
+                  href={`https://wa.me/${SITE_CONFIG.brand.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 rounded-full bg-uni-yellow text-uni-black font-bold hover:brightness-110 transition-all shadow-lg shadow-uni-yellow/20"
+                >
                   Sewa Sekarang
                 </a>
               </div>

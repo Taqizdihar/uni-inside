@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, Camera, Shield, Zap, Clock, CheckCircle2 } from 'lucide-react';
+import { SITE_CONFIG } from '@/constants/config';
 import { Link } from 'react-router-dom';
 
 const PhotographyPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }) => {
@@ -27,7 +28,12 @@ const PhotographyPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: an
                 Jasa fotografi profesional untuk acara, produk, atau portofolio. Kami mengabadikan setiap momen berharga Anda dengan kualitas gambar yang luar biasa dan artistik.
               </p>
               <div className="flex flex-wrap gap-4">
-                <a href="#contact" className="px-8 py-4 rounded-full bg-uni-yellow text-uni-black font-bold hover:brightness-110 transition-all shadow-lg shadow-uni-yellow/20">
+                <a 
+                  href={`https://wa.me/${SITE_CONFIG.brand.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 rounded-full bg-uni-yellow text-uni-black font-bold hover:brightness-110 transition-all shadow-lg shadow-uni-yellow/20"
+                >
                   Booking Sekarang
                 </a>
               </div>

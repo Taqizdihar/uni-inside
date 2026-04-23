@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, PenTool, Shield, Zap, Clock, CheckCircle2 } from 'lucide-react';
+import { SITE_CONFIG } from '@/constants/config';
 import { Link } from 'react-router-dom';
 
 const EditPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }) => {
@@ -27,7 +28,12 @@ const EditPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }) =>
                 Jasa editing video untuk konten sosial media atau proyek pribadi. Kami membantu Anda menciptakan video yang menarik, dinamis, dan profesional untuk audiens Anda.
               </p>
               <div className="flex flex-wrap gap-4">
-                <a href="#contact" className="px-8 py-4 rounded-full bg-uni-yellow text-uni-black font-bold hover:brightness-110 transition-all shadow-lg shadow-uni-yellow/20">
+                <a 
+                  href={`https://wa.me/${SITE_CONFIG.brand.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 rounded-full bg-uni-yellow text-uni-black font-bold hover:brightness-110 transition-all shadow-lg shadow-uni-yellow/20"
+                >
                   Konsultasi Sekarang
                 </a>
               </div>
