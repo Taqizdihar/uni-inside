@@ -34,14 +34,14 @@ const TeamCard = ({ member, position, isMobile, theme, isDarkMode }: any) => {
     animateProps = { x: 0, scale: 1, opacity: 1, zIndex: 30 };
     hoverProps = { scale: 1.05 };
   } else if (position === 'left') {
-    animateProps = { x: isMobile ? -130 : -240, scale: 0.8, opacity: 0.5, zIndex: 20 };
+    animateProps = { x: isMobile ? -140 : -280, scale: 0.8, opacity: 0.5, zIndex: 20 };
   } else if (position === 'right') {
-    animateProps = { x: isMobile ? 130 : 240, scale: 0.8, opacity: 0.5, zIndex: 20 };
+    animateProps = { x: isMobile ? 140 : 280, scale: 0.8, opacity: 0.5, zIndex: 20 };
   }
 
   return (
     <motion.div
-      className={`absolute top-0 bottom-0 m-auto w-64 h-96 ${position === 'center' ? 'cursor-pointer' : ''}`}
+      className={`absolute top-0 bottom-0 m-auto w-80 h-[480px] ${position === 'center' ? 'cursor-pointer' : ''}`}
       style={{ perspective: 1000 }}
       animate={animateProps}
       whileHover={hoverProps}

@@ -46,15 +46,15 @@ export const SITE_CONFIG = {
     growthDescription: "Total jumlah pengikut lintas sosial media aktif kami."
   },
   team: [
-    { id: 1, name: "Team Member 1", role: "Role 1", image: "april.jpg", bio: "Placeholder bio for member 1." },
-    { id: 2, name: "Team Member 2", role: "Role 2", image: "dian.jpg", bio: "Placeholder bio for member 2." },
-    { id: 3, name: "Team Member 3", role: "Role 3", image: "taqi.jpg", bio: "Placeholder bio for member 3." },
-    { id: 4, name: "Team Member 4", role: "Role 4", image: "qorry.jpg", bio: "Placeholder bio for member 4." },
-    { id: 5, name: "Team Member 5", role: "Role 5", image: "amadea.jpg", bio: "Placeholder bio for member 5." },
-    { id: 6, name: "Team Member 6", role: "Role 6", image: "nadine.jpg", bio: "Placeholder bio for member 6." },
-    { id: 7, name: "Team Member 7", role: "Role 7", image: "naura.jpg", bio: "Placeholder bio for member 7." },
-    { id: 8, name: "Team Member 8", role: "Role 8", image: "anggi.jpg", bio: "Placeholder bio for member 8." },
-    { id: 9, name: "Team Member 9", role: "Role 9", image: "amany.jpg", bio: "Placeholder bio for member 9." }
+    { id: 1, name: "Team Member 1", role: "Role 1", image: "April.jpg", bio: "Placeholder bio for member 1." },
+    { id: 2, name: "Team Member 2", role: "Role 2", image: "Dian.jpg", bio: "Placeholder bio for member 2." },
+    { id: 3, name: "Team Member 3", role: "Role 3", image: "Taqi.jpg", bio: "Placeholder bio for member 3." },
+    { id: 4, name: "Team Member 4", role: "Role 4", image: "Qorry.jpg", bio: "Placeholder bio for member 4." },
+    { id: 5, name: "Team Member 5", role: "Role 5", image: "Amadea.jpg", bio: "Placeholder bio for member 5." },
+    { id: 6, name: "Team Member 6", role: "Role 6", image: "Nadine.jpg", bio: "Placeholder bio for member 6." },
+    { id: 7, name: "Team Member 7", role: "Role 7", image: "Naura.jpg", bio: "Placeholder bio for member 7." },
+    { id: 8, name: "Team Member 8", role: "Role 8", image: "Anggi.jpg", bio: "Placeholder bio for member 8." },
+    { id: 9, name: "Team Member 9", role: "Role 9", image: "Amany.jpg", bio: "Placeholder bio for member 9." }
   ]
 };
 
