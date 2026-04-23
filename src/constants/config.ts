@@ -25,12 +25,6 @@ export const SITE_CONFIG = {
       handle: "@uniinside",
       followers: "1.8K",
       link: "https://www.tiktok.com/@uniinside.studio?is_from_webapp=1&sender_device=pc"
-    },
-    {
-      platform: "YouTube",
-      handle: "Uni-Inside Official",
-      followers: "0.8K",
-      link: "#"
     }
   ],
   partners: [
