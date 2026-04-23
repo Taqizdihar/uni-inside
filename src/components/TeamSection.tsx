@@ -62,23 +62,23 @@ const TeamCard = ({ member, position, isMobile, theme, isDarkMode }: any) => {
 
   return (
     <motion.div
-      className={`absolute top-0 bottom-0 m-auto ${position === 'center' ? 'cursor-pointer' : ''}`}
+      className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${position === 'center' ? 'cursor-pointer' : ''}`}
       style={{ perspective: 1000, width: isMobile ? 240 : 280 }}
-      animate={animateProps}
+      animate={{ ...animateProps, x: `calc(-50% + ${animateProps.x}px)`, y: "-50%" }}
       whileHover={hoverProps}
       transition={{ duration: 0.6, type: "spring", stiffness: 300, damping: 30 }}
       onClick={handleClick}
       initial={false}
     >
       <motion.div
-        className="w-full h-full relative"
+        className="w-full relative"
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.6, type: "spring", stiffness: 200, damping: 20 }}
         style={{ transformStyle: "preserve-3d" }}
       >
         {/* Front Side */}
         <div 
-          className={`absolute inset-0 rounded-3xl overflow-hidden flex flex-col border ${theme.border} ${position === 'center' && isDarkMode ? 'shadow-[0_0_20px_rgba(255,255,255,0.05)]' : position === 'center' ? 'shadow-lg' : ''}`} 
+          className={`w-full rounded-3xl overflow-hidden flex flex-col border ${theme.border} ${position === 'center' && isDarkMode ? 'shadow-[0_0_20px_rgba(255,255,255,0.05)]' : position === 'center' ? 'shadow-lg' : ''}`} 
           style={{ backfaceVisibility: 'hidden' }}
         >
           {/* Image Container — strict 4:5 aspect ratio */}
@@ -180,7 +180,14 @@ const TeamSection = ({ theme, isDarkMode }: any) => {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16 md:mb-24">
           <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-3`}>Our Team</h2>
-          <h3 className="text-4xl md:text-5xl font-black">Mengenal anggota kami lebih dekat.</h3>
+          <h3 className="text-4xl md:text-5xl font-black">Mengenal anggota kami lebih dekat</h3>
+          <motion.p
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className={`mt-4 text-sm font-bold ${theme.textMuted}`}
+          >
+            klik kartu untuk lihat detail
+          </motion.p>
         </div>
 
         <div className="relative w-full h-[500px] flex items-center justify-center">
@@ -205,7 +212,13 @@ const TeamSection = ({ theme, isDarkMode }: any) => {
           </div>
 
           {/* Stacked Carousel */}
-          <div className="relative w-full h-full flex justify-center">
+          <motion.div 
+            className="relative w-full h-full flex justify-center touch-pan-y"
+            onPanEnd={(e, info) => {
+              if (info.offset.x < -50) handleNext();
+              else if (info.offset.x > 50) handlePrev();
+            }}
+          >
             {team.map((member, i) => (
               <TeamCard 
                 key={member.id} 
@@ -216,7 +229,7 @@ const TeamSection = ({ theme, isDarkMode }: any) => {
                 isDarkMode={isDarkMode}
               />
             ))}
-          </div>
+          </motion.div>
 
         </div>
       </div>

@@ -204,11 +204,11 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
                 className={`${theme.cardBg} border ${theme.border} backdrop-blur-sm rounded-2xl p-8 group ${theme.cardHover} transition-colors w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] min-w-[280px] flex flex-col items-center text-center`}
               >
                 <div className={`w-24 h-24 rounded-2xl ${isDarkMode ? 'bg-white/5' : 'bg-black/5'} border ${theme.border} flex items-center justify-center font-black text-2xl ${theme.textYellow} mb-5 group-hover:bg-[#FAD02C]/10 transition-colors overflow-hidden`}>
-                  {/\.(jpeg|jpg|gif|png|svg)$/i.test(partner.logo) ? (
+                  {/\.(jpeg|jpg|gif|png|svg|webp)$/i.test(partner.logo) ? (
                     <img 
                       src={new URL(`../assets/partners/${partner.logo}`, import.meta.url).href} 
                       alt={partner.name} 
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-scale-down p-1"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = 'none';
                         (e.target as HTMLImageElement).parentElement!.innerText = partner.logo.substring(0, 2).toUpperCase();
