@@ -486,7 +486,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
               variants={{
                 visible: { transition: { staggerChildren: 0.05 } }
               }}
-              className="text-2xl md:text-4xl font-black leading-tight flex flex-wrap justify-center"
+              className="text-2xl md:text-4xl font-bold font-['Poppins'] leading-tight flex flex-wrap justify-center"
             >
               {aboutWords.map((word, i) => (
                 <motion.span 
@@ -570,7 +570,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
               
               {/* Centered Content within Full-Width Bar */}
               <div className="max-w-7xl mx-auto px-6 relative z-10">
-                <h4 className={`text-2xl md:text-3xl font-black mb-8 text-center md:text-left ${isDarkMode ? 'text-white' : 'text-uni-black'}`}>
+                <h4 className={`text-2xl md:text-3xl font-black mb-8 text-left ${isDarkMode ? 'text-white' : 'text-uni-black'}`}>
                   Produk Aplikasi Kami
                 </h4>
                 
@@ -578,20 +578,20 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                   {/* UNI-VERSE Card */}
                   <motion.div
                     whileHover={{ y: -5, scale: 1.01 }}
-                    className={`${theme.cardBg} backdrop-blur-xl border ${theme.border} rounded-3xl p-6 md:p-8 flex items-center justify-start h-36 md:h-44 group transition-all duration-300 relative overflow-hidden`}
+                    className={`${theme.cardBg} backdrop-blur-xl border ${theme.border} rounded-3xl p-6 md:p-8 flex items-center justify-center h-36 md:h-44 group transition-all duration-300 relative overflow-hidden`}
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-uni-yellow/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     <img 
                       src={universeLogo} 
                       alt="UNI-VERSE" 
-                      className="max-h-24 md:max-h-32 w-auto object-contain transition-transform duration-500 group-hover:scale-105 relative z-10"
+                      className="max-h-28 md:max-h-36 w-auto object-contain transition-transform duration-500 group-hover:scale-105 relative z-10"
                     />
                   </motion.div>
 
                   {/* UNI-AISEO Card */}
                   <motion.div
                     whileHover={{ y: -5, scale: 1.01 }}
-                    className={`${theme.cardBg} backdrop-blur-xl border ${theme.border} rounded-3xl p-6 md:p-8 flex items-center justify-start h-36 md:h-44 group transition-all duration-300 relative overflow-hidden`}
+                    className={`${theme.cardBg} backdrop-blur-xl border ${theme.border} rounded-3xl p-6 md:p-8 flex items-center justify-center h-36 md:h-44 group transition-all duration-300 relative overflow-hidden`}
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-uni-yellow/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     <AnimatePresence mode="wait">
@@ -603,7 +603,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 1.1 }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                        className="max-h-24 md:max-h-32 w-auto object-contain transition-transform duration-500 group-hover:scale-105 relative z-10"
+                        className="max-h-32 md:max-h-40 w-auto object-contain transition-transform duration-500 group-hover:scale-105 relative z-10"
                       />
                     </AnimatePresence>
                   </motion.div>
@@ -954,7 +954,7 @@ export default function App() {
     navBg: isDarkMode ? 'bg-uni-black/80' : 'bg-[#F9FAFB]/80',
     inputBg: isDarkMode ? 'bg-black/20' : 'bg-white',
     inputBorder: isDarkMode ? 'border-white/10' : 'border-black/10',
-    textYellow: isDarkMode ? 'text-uni-yellow' : 'text-[#A38F59]',
+    textYellow: isDarkMode ? 'text-uni-yellow' : 'text-[#f5a720]',
   };
 
   return (

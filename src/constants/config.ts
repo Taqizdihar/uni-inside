@@ -66,7 +66,7 @@ export const SITE_CONFIG = {
   team: [
     { id: 1, name: "April Adzani", role: "Chief Executive Officer", image: "April.jpg", bio: "Halo, nama saya April Adzani. Saya adalah CEO dari Uni-Inside.", socials: {} },
     { id: 2, name: "Dian T. S. Daeli", role: "Chief Operating Officer", image: "Dian.jpg", bio: "Halo, nama saya Dian Tri. Saya adalah COO dari Uni-Inside.", socials: {} },
-    { id: 3, name: "M. Taqi Izdihar", role: "Chief Technology Officer", image: "Taqi.jpg", bio: "Halo, saya adalah seorang peminat IT & Multimedia. Motto saya adalah 'Be patient & be grateful always'", socials: { instagram: "https://instagram.com/taqizdihar", website: "https://taqizdihar.my.id", linkedin: "https://linkedin.com/in/taqizdihar" } },
+    { id: 3, name: "M. Taqi Izdihar", role: "Chief Technology Officer", image: "Taqi.jpg", bio: "Halo, saya adalah seorang peminat IT & Multimedia. Motto saya adalah 'Be patient & be grateful always'", socials: { instagram: "https://instagram.com/taqizdihar", website: "https://beacons.ai/taqizdihar", linkedin: "https://linkedin.com/in/taqizdihar" } },
     { id: 4, name: "K. Qorry Kharismayani", role: "Student Daily Life Specialist", image: "Qorry.jpg", bio: "Halo, nama saya Qorry. Saya adalah Student Daily Life Specialist dari Uni-Inside.", socials: {} },
     { id: 5, name: "Amadea Salsabila", role: "Lab Daily Life Specialist", image: "Amadea.jpg", bio: "Halo, nama saya Amadea. Saya adalah Lab Daily Life Specialist dari Uni-Inside.", socials: {} },
     { id: 6, name: "Nadine Nathania", role: "News Report Specialist", image: "Nadine.jpg", bio: "Halo, nama saya Nadine. Saya adalah News Report Specialist dari Uni-Inside.", socials: {} },

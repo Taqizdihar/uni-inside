@@ -50,9 +50,9 @@ const TeamCard = ({ member, position, isMobile, theme, isDarkMode }: any) => {
     animateProps = { x: 0, scale: 1, opacity: 1, zIndex: 30 };
     hoverProps = { scale: 1.02 };
   } else if (position === 'left') {
-    animateProps = { x: isMobile ? -110 : -240, scale: 0.8, opacity: 0.5, zIndex: 20 };
+    animateProps = { x: isMobile ? -130 : -300, scale: 0.8, opacity: 0.5, zIndex: 20 };
   } else if (position === 'right') {
-    animateProps = { x: isMobile ? 110 : 240, scale: 0.8, opacity: 0.5, zIndex: 20 };
+    animateProps = { x: isMobile ? 130 : 300, scale: 0.8, opacity: 0.5, zIndex: 20 };
   }
 
   // Filter socials to only those with a URL
@@ -63,7 +63,7 @@ const TeamCard = ({ member, position, isMobile, theme, isDarkMode }: any) => {
   return (
     <motion.div
       className={`absolute top-1/2 left-1/2 ${position === 'center' ? 'cursor-pointer' : ''}`}
-      style={{ perspective: 1000, width: isMobile ? 240 : 280 }}
+      style={{ perspective: 1000, width: isMobile ? 280 : 340 }}
       animate={{ 
         x: `calc(-50% + ${animateProps.x}px)`, 
         y: "-50%",
@@ -196,7 +196,7 @@ const TeamSection = ({ theme, isDarkMode }: any) => {
           </motion.p>
         </div>
 
-        <div className="relative w-full h-[500px] flex items-center justify-center">
+        <div className="relative w-full h-[600px] flex items-center justify-center">
           
           {/* Navigation Buttons */}
           <div className="absolute w-full max-w-4xl flex justify-between px-4 md:px-12 z-40 pointer-events-none">

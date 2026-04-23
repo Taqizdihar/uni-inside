@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
 @theme {
   --color-uni-yellow: #FAD02C;
   --color-uni-black: #202121;
