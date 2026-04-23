@@ -17,32 +17,32 @@ export const SITE_CONFIG = {
     {
       platform: "Instagram",
       handle: "@uniinside.studio",
-      followers: "2.4K",
+      followers: "95",
       link: "https://www.instagram.com/uniinside.studio?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
     },
     {
       platform: "TikTok",
       handle: "@uniinside",
-      followers: "1.8K",
+      followers: "47",
       link: "https://www.tiktok.com/@uniinside.studio?is_from_webapp=1&sender_device=pc"
     }
   ],
   partners: [
     {
-      name: "Telkom University",
+      name: "D3 Sistem Informasi",
       logo: "TU",
-      description: "Universitas digital terkemuka di Indonesia, pusat inovasi dan kreativitas kampus.",
+      description: "Program studi D3 Sistem Informasi Telkom University yang terakreditasi Unggul.",
       link: "https://telkomuniversity.ac.id"
     },
     {
-      name: "BEM FIT",
+      name: "Koperasi Giat Sejahtera Bersama",
       logo: "BF",
-      description: "Badan Eksekutif Mahasiswa Fakultas Ilmu Terapan, mitra kolaborasi acara dan konten kampus.",
+      description: "Koperasi Telkom University yang menyediakan kebutuhan mahasiswa dan dosen.",
       link: "#"
     }
   ],
   mediaKit: {
-    totalFollowers: "5.0k+",
-    growthDescription: "Audiens yang tumbuh secara organik, mewakili demografi aktif dan engaged di lingkungan Telkom University dan sekitarnya."
+    totalFollowers: "142",
+    growthDescription: "Total jumlah pengikut lintas sosial media aktif kami."
   }
 };
