@@ -5,3 +5,11 @@
   --color-uni-black: #202121;
   --color-uni-white: #FFFFFF;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 80px; /* height of nav h-20 */
+}

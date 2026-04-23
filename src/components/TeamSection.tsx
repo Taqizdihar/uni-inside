@@ -62,9 +62,15 @@ const TeamCard = ({ member, position, isMobile, theme, isDarkMode }: any) => {
 
   return (
     <motion.div
-      className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${position === 'center' ? 'cursor-pointer' : ''}`}
+      className={`absolute top-1/2 left-1/2 ${position === 'center' ? 'cursor-pointer' : ''}`}
       style={{ perspective: 1000, width: isMobile ? 240 : 280 }}
-      animate={{ ...animateProps, x: `calc(-50% + ${animateProps.x}px)`, y: "-50%" }}
+      animate={{ 
+        x: `calc(-50% + ${animateProps.x}px)`, 
+        y: "-50%",
+        scale: animateProps.scale,
+        opacity: animateProps.opacity,
+        zIndex: animateProps.zIndex
+      }}
       whileHover={hoverProps}
       transition={{ duration: 0.6, type: "spring", stiffness: 300, damping: 30 }}
       onClick={handleClick}
@@ -212,13 +218,14 @@ const TeamSection = ({ theme, isDarkMode }: any) => {
           </div>
 
           {/* Stacked Carousel */}
-          <motion.div 
-            className="relative w-full h-full flex justify-center touch-pan-y"
-            onPanEnd={(e, info) => {
-              if (info.offset.x < -50) handleNext();
-              else if (info.offset.x > 50) handlePrev();
-            }}
-          >
+          <div className="relative w-full h-full flex items-center justify-center">
+            <motion.div 
+              className="relative w-full max-w-4xl h-full touch-pan-y"
+              onPanEnd={(e, info) => {
+                if (info.offset.x < -50) handleNext();
+                else if (info.offset.x > 50) handlePrev();
+              }}
+            >
             {team.map((member, i) => (
               <TeamCard 
                 key={member.id} 
@@ -229,7 +236,8 @@ const TeamSection = ({ theme, isDarkMode }: any) => {
                 isDarkMode={isDarkMode}
               />
             ))}
-          </motion.div>
+            </motion.div>
+          </div>
 
         </div>
       </div>

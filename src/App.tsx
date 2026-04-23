@@ -121,8 +121,9 @@ const Layout = ({ children, isDarkMode, toggleTheme, theme }: any) => {
           </Link>
           
           <div className={`hidden md:flex items-center gap-8 text-sm font-bold ${theme.textMuted}`}>
-            <a href="/#about" className={`hover:${theme.text} transition-colors`}>About Us</a>
+            <a href="/#about-us" className={`hover:${theme.text} transition-colors`}>About Us</a>
             <a href="/#why-us" className={`hover:${theme.text} transition-colors`}>Why Us</a>
+            <a href="/#our-team" className={`hover:${theme.text} transition-colors`}>Our Team</a>
             <a href="/#products" className={`hover:${theme.text} transition-colors`}>Products</a>
             <a href="/#contact" className={`hover:${theme.text} transition-colors`}>Contact</a>
           </div>
@@ -445,7 +446,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
       </section>
 
       {/* 2. About Us */}
-      <section id="about" ref={aboutRef} className={`py-24 px-6 ${theme.sectionBg} border-y ${theme.border} transition-colors duration-500 relative overflow-hidden`}>
+      <section id="about-us" ref={aboutRef} className={`py-24 px-6 ${theme.sectionBg} border-y ${theme.border} transition-colors duration-500 relative overflow-hidden`}>
         {/* Parallax Background Text */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center z-0">
           <motion.div 
@@ -538,7 +539,9 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
       </section>
 
       {/* Team Section */}
-      <TeamSection theme={theme} isDarkMode={isDarkMode} />
+      <div id="our-team">
+        <TeamSection theme={theme} isDarkMode={isDarkMode} />
+      </div>
 
       {/* 4. Our Products & Services */}
       <section id="products" className={`py-16 px-6 ${theme.sectionBg} border-y ${theme.border} transition-colors duration-500`}>
