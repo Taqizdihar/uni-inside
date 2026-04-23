@@ -6,6 +6,8 @@ import DronePage from './pages/DronePage';
 import EditPage from './pages/EditPage';
 import PhotographyPage from './pages/PhotographyPage';
 import SouvenirPage from './pages/SouvenirPage';
+import logoDark from './assets/logo/dark.png';
+import logoNormal from './assets/logo/normal.png';
 import { 
   ArrowRight, 
   Camera, 
@@ -101,23 +103,18 @@ const Layout = ({ children, isDarkMode, toggleTheme, theme }: any) => {
       <nav className={`fixed top-0 left-0 right-0 z-50 ${theme.navBg} backdrop-blur-md border-b ${theme.border} transition-colors duration-500`}>
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <img 
-              src={isDarkMode ? "/logo-dark.png" : "/logo-light.png"} 
-              alt="Uni-Inside Logo" 
-              className="h-10 w-auto object-contain"
-              onError={(e) => {
-                e.currentTarget.style.display = 'none';
-                e.currentTarget.nextElementSibling?.classList.remove('hidden');
-              }}
-            />
-            <div className="hidden flex items-center">
-              <span className={`text-2xl font-black tracking-tighter ${isDarkMode ? 'text-uni-white' : 'text-uni-black'}`}>
-                Uni
-              </span>
-              <span className="ml-1 px-2 py-0.5 bg-uni-yellow text-uni-black text-xl font-bold rounded-xl rounded-bl-sm">
-                Inside
-              </span>
-            </div>
+            <AnimatePresence mode="wait">
+              <motion.img 
+                key={isDarkMode ? 'dark' : 'light'}
+                src={isDarkMode ? logoDark : logoNormal} 
+                alt="The Uni-Inside Logo" 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="h-10 w-auto object-contain"
+              />
+            </AnimatePresence>
           </Link>
           
           <div className={`hidden md:flex items-center gap-8 text-sm font-bold ${theme.textMuted}`}>
@@ -174,14 +171,18 @@ const Layout = ({ children, isDarkMode, toggleTheme, theme }: any) => {
       <footer className={`${theme.sectionBg} py-12 px-6 border-t ${theme.border} transition-colors duration-500`}>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <div className="flex items-center">
-              <span className={`text-xl font-black tracking-tighter ${isDarkMode ? 'text-uni-white' : 'text-uni-black'}`}>
-                Uni
-              </span>
-              <span className="ml-1 px-1.5 py-0.5 bg-uni-yellow text-uni-black text-sm font-bold rounded-lg rounded-bl-sm">
-                Inside
-              </span>
-            </div>
+            <AnimatePresence mode="wait">
+              <motion.img 
+                key={isDarkMode ? 'dark' : 'light'}
+                src={isDarkMode ? logoDark : logoNormal} 
+                alt="The Uni-Inside Logo" 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="h-10 w-auto object-contain"
+              />
+            </AnimatePresence>
           </div>
           
           <p className={`${theme.textMuted} text-sm text-center md:text-left font-bold`}>
