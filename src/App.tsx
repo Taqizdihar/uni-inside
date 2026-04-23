@@ -106,13 +106,13 @@ const Layout = ({ children, isDarkMode, toggleTheme, theme }: any) => {
             <AnimatePresence mode="wait">
               <motion.img 
                 key={isDarkMode ? 'dark' : 'light'}
-                src={isDarkMode ? logoDark : logoNormal} 
+                src={isDarkMode ? logoNormal : logoDark} 
                 alt="The Uni-Inside Logo" 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="h-10 w-auto object-contain"
+                className="h-14 w-auto object-contain"
               />
             </AnimatePresence>
           </Link>
@@ -174,13 +174,13 @@ const Layout = ({ children, isDarkMode, toggleTheme, theme }: any) => {
             <AnimatePresence mode="wait">
               <motion.img 
                 key={isDarkMode ? 'dark' : 'light'}
-                src={isDarkMode ? logoDark : logoNormal} 
+                src={isDarkMode ? logoNormal : logoDark} 
                 alt="The Uni-Inside Logo" 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="h-10 w-auto object-contain"
+                className="h-14 w-auto object-contain"
               />
             </AnimatePresence>
           </div>
