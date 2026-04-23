@@ -184,9 +184,9 @@ const TeamSection = ({ theme, isDarkMode }: any) => {
   return (
     <section className={`py-24 px-6 relative overflow-hidden ${theme.sectionBg} border-t ${theme.border} transition-colors duration-500`}>
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-16 md:mb-24">
+        <div className="text-center mb-6 md:mb-10">
           <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-3`}>Our Team</h2>
-          <h3 className="text-4xl md:text-5xl font-black mb-10">Mengenal anggota kami lebih dekat</h3>
+          <h3 className="text-4xl md:text-5xl font-black mb-10">Mengenal Anggota Kami Lebih Dekat</h3>
           <motion.p
             animate={{ scale: [1, 1.05, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -196,7 +196,7 @@ const TeamSection = ({ theme, isDarkMode }: any) => {
           </motion.p>
         </div>
 
-        <div className="relative w-full h-[500px] flex items-center justify-center -mt-8">
+        <div className="relative w-full h-[500px] flex items-center justify-center">
           
           {/* Navigation Buttons */}
           <div className="absolute w-full max-w-4xl flex justify-between px-4 md:px-12 z-40 pointer-events-none">

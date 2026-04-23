@@ -10,6 +10,8 @@ import MediaKitPage from './pages/MediaKitPage';
 import TeamSection from './components/TeamSection';
 import logoDark from './assets/logo/dark.png';
 import logoNormal from './assets/logo/normal.png';
+import horizontalDark from './assets/logo/horizontal dark.png';
+import horizontalNormal from './assets/logo/horizontal normal.png';
 import heroImg from './assets/images/hero.jpg';
 import { SITE_CONFIG } from '@/constants/config';
 import { 
@@ -447,13 +449,21 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
 
       {/* 2. About Us */}
       <section id="about-us" ref={aboutRef} className={`py-24 px-6 ${theme.sectionBg} border-y ${theme.border} transition-colors duration-500 relative overflow-hidden`}>
-        {/* Parallax Background Text */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center z-0">
-          <motion.div 
-            style={{ y: parallaxY }}
-            className={`text-[12vw] font-black uppercase tracking-widest opacity-5 whitespace-nowrap ${isDarkMode ? 'text-white' : 'text-black'}`}
-          >
-            UNI-INSIDE
+        {/* Parallax Background Logo */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center z-0 opacity-50">
+          <motion.div style={{ y: parallaxY }} className="w-full max-w-5xl px-8 flex justify-center">
+            <AnimatePresence mode="wait">
+              <motion.img 
+                key={isDarkMode ? 'dark' : 'light'}
+                src={isDarkMode ? horizontalNormal : horizontalDark}
+                alt="Uni-Inside Background"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className="w-full h-auto object-contain opacity-20"
+              />
+            </AnimatePresence>
           </motion.div>
         </div>
 
@@ -497,7 +507,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="mb-16 md:mb-24 text-center">
             <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-3`}>Why Choose Us</h2>
-            <h3 className="text-4xl md:text-5xl font-black">Keunggulan Kami.</h3>
+            <h3 className="text-4xl md:text-5xl font-black">Keunggulan Kami</h3>
           </div>
           
           <motion.div 
@@ -548,7 +558,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
             <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-3`}>Our Products & Services</h2>
-            <h3 className="text-4xl md:text-5xl font-black max-w-2xl">Layanan kreatif yang kami tawarkan untuk Anda.</h3>
+            <h3 className="text-4xl md:text-5xl font-black max-w-2xl">Layanan Kreatif yang Kami Tawarkan untuk Anda</h3>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -692,7 +702,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
               viewport={{ once: true }}
             >
               <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-3`}>Contact Us</h2>
-              <h3 className="text-4xl md:text-5xl font-black mb-6">Mari berkolaborasi.</h3>
+              <h3 className="text-4xl md:text-5xl font-black mb-6">Mari Berkolaborasi</h3>
               <p className={`${theme.textMuted} text-lg mb-12 max-w-md font-medium`}>
                 Punya ide gila yang ingin diwujudkan? Atau sekadar ingin bertanya tentang layanan kami? Jangan ragu untuk menghubungi tim Uni-Inside.
               </p>

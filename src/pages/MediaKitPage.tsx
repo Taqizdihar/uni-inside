@@ -19,13 +19,13 @@ const XIcon = ({ className }: { className?: string }) => (
 );
 
 const PLATFORM_ICONS: Record<string, any> = {
-  Instagram: Instagram,
-  TikTok: TikTokIcon,
-  YouTube: Youtube,
-  LinkedIn: Linkedin,
-  Facebook: Facebook,
-  X: XIcon,
-  Twitter: XIcon
+  instagram: Instagram,
+  tiktok: TikTokIcon,
+  youtube: Youtube,
+  linkedin: Linkedin,
+  facebook: Facebook,
+  x: XIcon,
+  twitter: XIcon
 };
 
 const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }) => {
@@ -137,8 +137,8 @@ const MediaKitPage = ({ isDarkMode, theme }: { isDarkMode: boolean, theme: any }
               >
                 <div className="flex justify-between items-start mb-8">
                   <div className={`w-12 h-12 rounded-2xl ${isDarkMode ? 'bg-white/5' : 'bg-black/5'} border ${theme.border} flex items-center justify-center font-black ${theme.textYellow} group-hover:bg-[#FAD02C]/10 transition-colors`}>
-                    {PLATFORM_ICONS[social.platform] ? (
-                      React.createElement(PLATFORM_ICONS[social.platform], { className: "w-6 h-6" })
+                    {PLATFORM_ICONS[social.platform.toLowerCase()] ? (
+                      React.createElement(PLATFORM_ICONS[social.platform.toLowerCase()], { className: "w-6 h-6" })
                     ) : (
                       social.platform.substring(0, 2).toUpperCase()
                     )}
