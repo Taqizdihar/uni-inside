@@ -6,6 +6,7 @@ import DronePage from './pages/DronePage';
 import EditPage from './pages/EditPage';
 import PhotographyPage from './pages/PhotographyPage';
 import SouvenirPage from './pages/SouvenirPage';
+import MediaKitPage from './pages/MediaKitPage';
 import logoDark from './assets/logo/dark.png';
 import logoNormal from './assets/logo/normal.png';
 import { 
@@ -155,12 +156,12 @@ const Layout = ({ children, isDarkMode, toggleTheme, theme }: any) => {
               </AnimatePresence>
             </button>
             
-            <a 
-              href="/#contact" 
+            <Link 
+              to="/mediakit" 
               className="px-5 py-2.5 rounded-full bg-uni-yellow text-uni-black text-sm font-bold hover:brightness-110 transition-all shadow-lg shadow-uni-yellow/20"
             >
-              Mulai Proyek
-            </a>
+              Media Kit
+            </Link>
           </div>
         </div>
       </nav>
@@ -897,6 +898,7 @@ export default function App() {
           <Route path="/edit" element={<EditPage isDarkMode={isDarkMode} theme={theme} />} />
           <Route path="/photography" element={<PhotographyPage isDarkMode={isDarkMode} theme={theme} />} />
           <Route path="/souvenir" element={<SouvenirPage isDarkMode={isDarkMode} theme={theme} />} />
+          <Route path="/mediakit" element={<MediaKitPage isDarkMode={isDarkMode} theme={theme} />} />
         </Routes>
       </Layout>
     </BrowserRouter>
