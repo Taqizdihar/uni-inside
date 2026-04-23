@@ -25,25 +25,25 @@ export const SITE_CONFIG = {
       handle: "@uniinside",
       followers: "47",
       link: "https://www.tiktok.com/@uniinside.studio?is_from_webapp=1&sender_device=pc"
-    },
-    {
-      platform: "YouTube",
-      handle: "Uni-Inside Studio",
-      followers: "12",
-      link: "#"
-    },
-    {
-      platform: "LinkedIn",
-      handle: "Uni-Inside",
-      followers: "34",
-      link: "#"
-    },
-    {
-      platform: "X",
-      handle: "@uniinside",
-      followers: "18",
-      link: "#"
     }
+    //{
+    //  platform: "YouTube",
+    //  handle: "Uni-Inside Studio",
+    //  followers: "12",
+    //  link: "#"
+    //},
+    //{
+    //  platform: "LinkedIn",
+    //  handle: "Uni-Inside",
+    //  followers: "34",
+    //  link: "#"
+    //},
+    //{
+    //  platform: "X",
+    //  handle: "@uniinside",
+    //  followers: "18",
+    //  link: "#"
+    //}
   ],
   partners: [
     {

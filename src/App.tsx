@@ -13,6 +13,9 @@ import logoNormal from './assets/logo/normal.png';
 import horizontalDark from './assets/logo/horizontal dark.png';
 import horizontalNormal from './assets/logo/horizontal normal.png';
 import heroImg from './assets/images/hero.jpg';
+import universeLogo from './assets/app products/UNI-VERSE.png';
+import aiseoDark from './assets/app products/UNI-AISEO Dark Mode.png';
+import aiseoLight from './assets/app products/UNI-AISEO Light Mode.png';
 import { SITE_CONFIG } from '@/constants/config';
 import { 
   ArrowRight, 
@@ -450,7 +453,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
       {/* 2. About Us */}
       <section id="about-us" ref={aboutRef} className={`py-24 px-6 ${theme.sectionBg} border-y ${theme.border} transition-colors duration-500 relative overflow-hidden`}>
         {/* Parallax Background Logo */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center z-0 opacity-50">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center z-0 opacity-10">
           <motion.div style={{ y: parallaxY }} className="w-full max-w-5xl px-8 flex justify-center">
             <AnimatePresence mode="wait">
               <motion.img 
@@ -461,7 +464,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="w-full h-auto object-contain opacity-20"
+                className="w-full h-auto object-contain"
               />
             </AnimatePresence>
           </motion.div>
@@ -554,11 +557,58 @@ function LandingPage({ isDarkMode, toggleTheme, theme }: any) {
       </div>
 
       {/* 4. Our Products & Services */}
-      <section id="products" className={`py-16 px-6 ${theme.sectionBg} border-y ${theme.border} transition-colors duration-500`}>
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-12">
+      <section id="products" className={`py-24 ${theme.sectionBg} border-y ${theme.border} transition-colors duration-500`}>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-16">
             <h2 className={`text-sm font-black tracking-widest ${theme.textYellow} uppercase mb-3`}>Our Products & Services</h2>
-            <h3 className="text-4xl md:text-5xl font-black max-w-2xl">Layanan Kreatif yang Kami Tawarkan untuk Anda</h3>
+            <h3 className="text-4xl md:text-5xl font-black max-w-2xl mb-12">Layanan Kreatif yang Kami Tawarkan untuk Anda</h3>
+            
+            {/* Produk Aplikasi Kami - Full Width Style Container */}
+            <div className="relative -mx-6 px-6 py-16 mb-20 overflow-hidden">
+              {/* Subtle background for the app section to make it feel "full width" even if inside the main section */}
+              <div className={`absolute inset-0 ${isDarkMode ? 'bg-white/[0.02]' : 'bg-black/[0.02]'} border-y ${theme.border}`} />
+              
+              <div className="relative z-10">
+                <h4 className={`text-2xl md:text-3xl font-black mb-8 text-center md:text-left ${isDarkMode ? 'text-white' : 'text-uni-black'}`}>
+                  Produk Aplikasi Kami
+                </h4>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {/* UNI-VERSE Card */}
+                  <motion.div
+                    whileHover={{ y: -5, scale: 1.01 }}
+                    className={`${theme.cardBg} backdrop-blur-xl border ${theme.border} rounded-3xl p-10 flex items-center justify-center h-48 md:h-56 group transition-all duration-300 relative overflow-hidden`}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-uni-yellow/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <img 
+                      src={universeLogo} 
+                      alt="UNI-VERSE" 
+                      className="max-h-24 md:max-h-28 w-auto object-contain transition-transform duration-500 group-hover:scale-110 relative z-10"
+                    />
+                  </motion.div>
+
+                  {/* UNI-AISEO Card */}
+                  <motion.div
+                    whileHover={{ y: -5, scale: 1.01 }}
+                    className={`${theme.cardBg} backdrop-blur-xl border ${theme.border} rounded-3xl p-10 flex items-center justify-center h-48 md:h-56 group transition-all duration-300 relative overflow-hidden`}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-uni-yellow/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <AnimatePresence mode="wait">
+                      <motion.img 
+                        key={isDarkMode ? 'dark' : 'light'}
+                        src={isDarkMode ? aiseoDark : aiseoLight} 
+                        alt="UNI-AISEO" 
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 1.1 }}
+                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                        className="max-h-24 md:max-h-28 w-auto object-contain transition-transform duration-500 group-hover:scale-110 relative z-10"
+                      />
+                    </AnimatePresence>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
