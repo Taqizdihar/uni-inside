@@ -59,6 +59,18 @@ export const SITE_CONFIG = {
       en: "Total followers across all of our active social media platforms."
     }
   },
+  latestPosts: {
+    instagram: [
+      "https://www.instagram.com/reel/DJG8C69yvOY/",
+      "https://www.instagram.com/reel/DI7MkQOShPv/",
+      "https://www.instagram.com/reel/DIsEqj6y26F/"
+    ],
+    tiktok: [
+      "https://www.tiktok.com/@uniinside.studio/video/7501827997614984454",
+      "https://www.tiktok.com/@uniinside.studio/video/7493564723908138245",
+      "https://www.tiktok.com/@uniinside.studio/video/7486356476503483653"
+    ]
+  },
   team: [
     { id: 1, name: "April Adzani", role: "Chief Executive Officer", image: "April.jpg", bio: { id: "Halo, nama saya April Adzani. Saya adalah CEO dari Uni-Inside.", en: "Hi, I'm April Adzani. I serve as the CEO of Uni-Inside." }, socials: {} },
     { id: 2, name: "Dian T. S. Daeli", role: "Chief Operating Officer", image: "Dian.jpg", bio: { id: "Halo, nama saya Dian Tri. Saya adalah COO dari Uni-Inside.", en: "Hi, I'm Dian Tri. I serve as the COO of Uni-Inside." }, socials: {} },
@@ -200,6 +212,9 @@ export const UI_TEXT = {
       desc: { id: "Kampanye yang dirancang untuk dialami secara mulus di seluruh platform digital modern.", en: "Campaigns designed to be experienced seamlessly across all modern digital platforms." }
     },
     partnersHeading: { id: "Partner Kami", en: "Our Partners" },
+    latestPostsHeading: { id: "Postingan Terbaru Kami", en: "Our Latest Posts" },
+    latestPostsInstagram: { id: "Instagram", en: "Instagram" },
+    latestPostsTiktok: { id: "TikTok", en: "TikTok" },
     ctaHeading: { id: "Mulai Berkolaborasi", en: "Start Collaborating" },
     ctaButton: { id: "Hubungi Kami", en: "Contact Us" },
   },

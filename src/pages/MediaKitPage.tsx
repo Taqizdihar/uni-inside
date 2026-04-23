@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Download, Mail, Users, Target, ExternalLink, MessageCircle, Instagram, Youtube, Linkedin, Facebook } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
@@ -30,6 +30,8 @@ const PLATFORM_ICONS: Record<string, any> = {
 };
 
 const MediaKitPage = ({ isDarkMode, theme, lang = 'id' as Lang }: { isDarkMode: boolean, theme: any, lang?: Lang }) => {
+  const [activeTab, setActiveTab] = useState<'instagram' | 'tiktok'>('instagram');
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -241,6 +243,94 @@ const MediaKitPage = ({ isDarkMode, theme, lang = 'id' as Lang }: { isDarkMode: 
               </motion.a>
             ))}
           </div>
+        </motion.section>
+
+        {/* E. Postingan Terbaru Kami */}
+        <motion.section 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="mb-32"
+        >
+          <motion.div variants={fadeInUp} className="text-center mb-10">
+            <h2 className="text-2xl font-black">{t(UI_TEXT.mediaKit.latestPostsHeading, lang)}</h2>
+          </motion.div>
+
+          {/* Tabs */}
+          <motion.div variants={fadeInUp} className="flex justify-center gap-3 mb-10">
+            <button
+              onClick={() => setActiveTab('instagram')}
+              className={`px-6 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 flex items-center gap-2 border ${
+                activeTab === 'instagram'
+                  ? 'bg-[#f5a720] text-uni-black border-[#f5a720] shadow-lg shadow-[#f5a720]/20'
+                  : `${theme.cardBg} ${theme.cardHover} ${theme.text} ${theme.border}`
+              }`}
+            >
+              <Instagram className="w-4 h-4" />
+              {t(UI_TEXT.mediaKit.latestPostsInstagram, lang)}
+            </button>
+            <button
+              onClick={() => setActiveTab('tiktok')}
+              className={`px-6 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 flex items-center gap-2 border ${
+                activeTab === 'tiktok'
+                  ? 'bg-[#f5a720] text-uni-black border-[#f5a720] shadow-lg shadow-[#f5a720]/20'
+                  : `${theme.cardBg} ${theme.cardHover} ${theme.text} ${theme.border}`
+              }`}
+            >
+              <TikTokIcon className="w-4 h-4" />
+              {t(UI_TEXT.mediaKit.latestPostsTiktok, lang)}
+            </button>
+          </motion.div>
+
+          {/* Carousel */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.35, ease: "easeInOut" }}
+            >
+              <motion.div
+                className="flex gap-6 cursor-grab active:cursor-grabbing px-2"
+                drag="x"
+                dragConstraints={{ left: -(SITE_CONFIG.latestPosts[activeTab].length * 280 - (typeof window !== 'undefined' ? Math.min(window.innerWidth - 60, 1200) : 900)), right: 0 }}
+                dragElastic={0.15}
+                dragTransition={{ bounceStiffness: 300, bounceDamping: 30 }}
+              >
+                {SITE_CONFIG.latestPosts[activeTab].map((url, i) => {
+                  const embedUrl = activeTab === 'instagram'
+                    ? url.replace(/\/$/, '') + '/embed'
+                    : `https://www.tiktok.com/embed/v2/${url.split('/video/')[1]?.replace(/\/$/, '') || ''}`;
+
+                  return (
+                    <motion.div
+                      key={`${activeTab}-${i}`}
+                      className={`shrink-0 w-[260px] md:w-[300px] rounded-3xl overflow-hidden border ${theme.border} ${theme.cardBg} backdrop-blur-xl relative group`}
+                      whileHover={{ y: -4, scale: 1.01 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {/* Subtle glow on hover */}
+                      <div className="absolute inset-0 bg-gradient-to-b from-[#FAD02C]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 rounded-3xl" />
+                      
+                      {/* 9:16 iframe container */}
+                      <div className="w-full aspect-[9/16] relative">
+                        <iframe
+                          src={embedUrl}
+                          className="absolute inset-0 w-full h-full border-0"
+                          allowFullScreen
+                          loading="lazy"
+                          title={`${activeTab} post ${i + 1}`}
+                          allow="encrypted-media"
+                        />
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
         </motion.section>
 
         {/* E. Ajakan Bertindak */}
