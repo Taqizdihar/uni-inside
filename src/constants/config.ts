@@ -215,6 +215,18 @@ export const UI_TEXT = {
     latestPostsHeading: { id: "Postingan Terbaru Kami", en: "Our Latest Posts" },
     latestPostsInstagram: { id: "Instagram", en: "Instagram" },
     latestPostsTiktok: { id: "TikTok", en: "TikTok" },
+    latestPosts: {
+      instagram: [
+        "https://www.instagram.com/reel/DXb6iB8DAGD/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+        "https://www.instagram.com/reel/DXW5hQyjGTf/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+        "https://www.instagram.com/reel/DXUPtOHjH8e/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+      ],
+      tiktok: [
+        "https://www.tiktok.com/@username/video/ID_VIDEO_1",
+        "https://www.tiktok.com/@username/video/ID_VIDEO_2",
+        "https://www.tiktok.com/@username/video/ID_VIDEO_3"
+      ]
+    },
     ctaHeading: { id: "Mulai Berkolaborasi", en: "Start Collaborating" },
     ctaButton: { id: "Hubungi Kami", en: "Contact Us" },
   },
