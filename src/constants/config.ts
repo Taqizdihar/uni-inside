@@ -63,12 +63,22 @@ export const SITE_CONFIG = {
     instagram: [
       "https://www.instagram.com/reel/DXb6iB8DAGD/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
       "https://www.instagram.com/reel/DXW5hQyjGTf/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-      "https://www.instagram.com/reel/DXUPtOHjH8e/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA=="
+      "https://www.instagram.com/reel/DXUPtOHjH8e/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+      "https://www.instagram.com/reel/DXPH77UDPu6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+      "https://www.instagram.com/reel/DXMgNx7jD-o/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+      "https://www.instagram.com/reel/DXJtr7GjLAp/?utm_source=ig_web_copy_link",
+      "https://www.instagram.com/reel/DXE5tFIDO9m/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+      "https://www.instagram.com/reel/DW_mMwkjDF2/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
     ],
     tiktok: [
-      "https://www.tiktok.com/@username/video/ID_VIDEO_1",
-      "https://www.tiktok.com/@username/video/ID_VIDEO_2",
-      "https://www.tiktok.com/@username/video/ID_VIDEO_3"
+      "https://www.tiktok.com/@uniinside.studio/video/7631831990668676360?is_from_webapp=1&sender_device=pc&web_id=7543135066089227792",
+      "https://www.tiktok.com/@uniinside.studio/video/7631579485447523604?is_from_webapp=1&sender_device=pc&web_id=7543135066089227792",
+      "https://www.tiktok.com/@uniinside.studio/video/7630858390260190485?is_from_webapp=1&sender_device=pc&web_id=7543135066089227792",
+      "https://www.tiktok.com/@uniinside.studio/video/7629738529131695381?is_from_webapp=1&sender_device=pc&web_id=7543135066089227792",
+      "https://www.tiktok.com/@uniinside.studio/video/7628956879393131783?is_from_webapp=1&sender_device=pc&web_id=7543135066089227792",
+      "https://www.tiktok.com/@uniinside.studio/video/7628265187661040917?is_from_webapp=1&sender_device=pc&web_id=7543135066089227792",
+      "https://www.tiktok.com/@uniinside.studio/video/7627496943815527700?is_from_webapp=1&sender_device=pc&web_id=7543135066089227792",
+      "https://www.tiktok.com/@uniinside.studio/video/7624539662824000789?is_from_webapp=1&sender_device=pc&web_id=7543135066089227792"
     ]
   },
   team: [
