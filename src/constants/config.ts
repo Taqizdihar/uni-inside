@@ -219,7 +219,7 @@ export const UI_TEXT = {
       instagram: [
         "https://www.instagram.com/reel/DXb6iB8DAGD/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
         "https://www.instagram.com/reel/DXW5hQyjGTf/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-        "https://www.instagram.com/reel/DXUPtOHjH8e/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+        "https://www.instagram.com/reel/DXUPtOHjH8e/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA=="
       ],
       tiktok: [
         "https://www.tiktok.com/@username/video/ID_VIDEO_1",
