@@ -61,14 +61,14 @@ export const SITE_CONFIG = {
   },
   latestPosts: {
     instagram: [
-      "https://www.instagram.com/reel/DJG8C69yvOY/",
-      "https://www.instagram.com/reel/DI7MkQOShPv/",
-      "https://www.instagram.com/reel/DIsEqj6y26F/"
+      "https://www.instagram.com/reel/DXb6iB8DAGD/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+      "https://www.instagram.com/reel/DXW5hQyjGTf/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+      "https://www.instagram.com/reel/DXUPtOHjH8e/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA=="
     ],
     tiktok: [
-      "https://www.tiktok.com/@uniinside.studio/video/7501827997614984454",
-      "https://www.tiktok.com/@uniinside.studio/video/7493564723908138245",
-      "https://www.tiktok.com/@uniinside.studio/video/7486356476503483653"
+      "https://www.tiktok.com/@username/video/ID_VIDEO_1",
+      "https://www.tiktok.com/@username/video/ID_VIDEO_2",
+      "https://www.tiktok.com/@username/video/ID_VIDEO_3"
     ]
   },
   team: [
@@ -215,18 +215,6 @@ export const UI_TEXT = {
     latestPostsHeading: { id: "Postingan Terbaru Kami", en: "Our Latest Posts" },
     latestPostsInstagram: { id: "Instagram", en: "Instagram" },
     latestPostsTiktok: { id: "TikTok", en: "TikTok" },
-    latestPosts: {
-      instagram: [
-        "https://www.instagram.com/reel/DXb6iB8DAGD/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-        "https://www.instagram.com/reel/DXW5hQyjGTf/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-        "https://www.instagram.com/reel/DXUPtOHjH8e/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA=="
-      ],
-      tiktok: [
-        "https://www.tiktok.com/@username/video/ID_VIDEO_1",
-        "https://www.tiktok.com/@username/video/ID_VIDEO_2",
-        "https://www.tiktok.com/@username/video/ID_VIDEO_3"
-      ]
-    },
     ctaHeading: { id: "Mulai Berkolaborasi", en: "Start Collaborating" },
     ctaButton: { id: "Hubungi Kami", en: "Contact Us" },
   },
