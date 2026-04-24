@@ -36,6 +36,38 @@ const MediaKitPage = ({ isDarkMode, theme, lang = 'id' as Lang }: { isDarkMode: 
     window.scrollTo(0, 0);
   }, []);
 
+  // Helper to load external scripts for social embeds
+  useEffect(() => {
+    const loadScripts = () => {
+      // Instagram
+      if (!document.getElementById('instagram-embed-script')) {
+        const igScript = document.createElement('script');
+        igScript.id = 'instagram-embed-script';
+        igScript.src = 'https://www.instagram.com/embed.js';
+        igScript.async = true;
+        document.body.appendChild(igScript);
+      }
+      
+      // TikTok
+      if (!document.getElementById('tiktok-embed-script')) {
+        const ttScript = document.createElement('script');
+        ttScript.id = 'tiktok-embed-script';
+        ttScript.src = 'https://www.tiktok.com/embed.js';
+        ttScript.async = true;
+        document.body.appendChild(ttScript);
+      }
+    };
+
+    loadScripts();
+  }, []);
+
+  // Re-process embeds when tab changes
+  useEffect(() => {
+    if (activeTab === 'instagram' && (window as any).instgrm) {
+      (window as any).instgrm.Embeds.process();
+    }
+  }, [activeTab]);
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
@@ -293,37 +325,46 @@ const MediaKitPage = ({ isDarkMode, theme, lang = 'id' as Lang }: { isDarkMode: 
               transition={{ duration: 0.35, ease: "easeInOut" }}
             >
               <motion.div
-                className="flex gap-6 cursor-grab active:cursor-grabbing px-2"
+                className="flex gap-6 cursor-grab active:cursor-grabbing px-2 pb-8 overflow-x-auto no-scrollbar scroll-smooth"
                 drag="x"
-                dragConstraints={{ left: -(SITE_CONFIG.latestPosts[activeTab].length * 280 - (typeof window !== 'undefined' ? Math.min(window.innerWidth - 60, 1200) : 900)), right: 0 }}
+                dragConstraints={{ left: -(SITE_CONFIG.latestPosts[activeTab].length * 320 - (typeof window !== 'undefined' ? Math.min(window.innerWidth - 60, 1200) : 900)), right: 0 }}
                 dragElastic={0.15}
                 dragTransition={{ bounceStiffness: 300, bounceDamping: 30 }}
               >
                 {SITE_CONFIG.latestPosts[activeTab].map((url, i) => {
-                  const embedUrl = activeTab === 'instagram'
-                    ? url.replace(/\/$/, '') + '/embed'
-                    : `https://www.tiktok.com/embed/v2/${url.split('/video/')[1]?.replace(/\/$/, '') || ''}`;
-
                   return (
                     <motion.div
                       key={`${activeTab}-${i}`}
-                      className={`shrink-0 w-[260px] md:w-[300px] rounded-3xl overflow-hidden border ${theme.border} ${theme.cardBg} backdrop-blur-xl relative group`}
-                      whileHover={{ y: -4, scale: 1.01 }}
-                      transition={{ duration: 0.3 }}
+                      className={`shrink-0 w-[280px] md:w-[320px] rounded-3xl overflow-hidden border ${theme.border} ${theme.cardBg} backdrop-blur-xl relative group shadow-2xl`}
+                      whileHover={{ y: -8, scale: 1.02 }}
+                      transition={{ duration: 0.4 }}
                     >
                       {/* Subtle glow on hover */}
-                      <div className="absolute inset-0 bg-gradient-to-b from-[#FAD02C]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 rounded-3xl" />
+                      <div className="absolute inset-0 bg-gradient-to-b from-[#FAD02C]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 rounded-3xl" />
                       
-                      {/* 9:16 iframe container */}
-                      <div className="w-full aspect-[9/16] relative">
-                        <iframe
-                          src={embedUrl}
-                          className="absolute inset-0 w-full h-full border-0"
-                          allowFullScreen
-                          loading="lazy"
-                          title={`${activeTab} post ${i + 1}`}
-                          allow="encrypted-media"
-                        />
+                      {/* Embed Container with 9:16 aspect ratio */}
+                      <div className="w-full aspect-[9/16] relative flex items-center justify-center bg-black/20 overflow-y-auto no-scrollbar">
+                        {activeTab === 'instagram' ? (
+                          <div className="w-full h-full scale-[0.85] md:scale-[0.9] origin-top pt-4">
+                            <blockquote 
+                              className="instagram-media" 
+                              data-instgrm-permalink={url} 
+                              data-instgrm-version="14"
+                              style={{ width: '100%', border: 'none', margin: 0, padding: 0 }}
+                            ></blockquote>
+                          </div>
+                        ) : (
+                          <div className="w-full h-full overflow-hidden">
+                             <blockquote 
+                              className="tiktok-embed" 
+                              cite={url} 
+                              data-video-id={url.split('/video/')[1]?.split('?')[0] || ''}
+                              style={{ width: '100%', height: '100%', margin: 0, padding: 0 }}
+                            >
+                              <section></section>
+                            </blockquote>
+                          </div>
+                        )}
                       </div>
                     </motion.div>
                   );
