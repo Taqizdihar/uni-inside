@@ -588,20 +588,20 @@ function LandingPage({ isDarkMode, toggleTheme, theme, lang }: any) {
                   {/* UNI-VERSE Card */}
                   <motion.div
                     whileHover={{ y: -5, scale: 1.01 }}
-                    className={`${theme.cardBg} backdrop-blur-xl border ${theme.border} rounded-3xl p-6 md:p-8 flex items-center justify-center h-36 md:h-44 group transition-all duration-300 relative overflow-hidden`}
+                    className={`${theme.cardBg} backdrop-blur-xl border ${theme.border} rounded-3xl p-6 md:p-8 flex items-center justify-center h-40 md:h-52 group transition-all duration-300 relative overflow-hidden`}
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-uni-yellow/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     <img 
                       src={universeLogo} 
                       alt="UNI-VERSE" 
-                      className="max-h-28 md:max-h-36 w-auto object-contain transition-transform duration-500 group-hover:scale-105 relative z-10"
+                      className="max-h-32 md:max-h-40 w-auto object-contain transition-transform duration-500 group-hover:scale-105 relative z-10"
                     />
                   </motion.div>
 
                   {/* UNI-AISEO Card */}
                   <motion.div
                     whileHover={{ y: -5, scale: 1.01 }}
-                    className={`${theme.cardBg} backdrop-blur-xl border ${theme.border} rounded-3xl p-6 md:p-8 flex items-center justify-center h-36 md:h-44 group transition-all duration-300 relative overflow-hidden`}
+                    className={`${theme.cardBg} backdrop-blur-xl border ${theme.border} rounded-3xl p-6 md:p-8 flex items-center justify-center h-40 md:h-52 group transition-all duration-300 relative overflow-hidden`}
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-uni-yellow/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     <AnimatePresence mode="wait">
@@ -613,7 +613,7 @@ function LandingPage({ isDarkMode, toggleTheme, theme, lang }: any) {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 1.1 }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                        className="max-h-36 md:max-h-44 w-auto object-contain transition-transform duration-500 group-hover:scale-105 relative z-10"
+                        className="max-h-40 md:max-h-52 w-auto object-contain transition-transform duration-500 group-hover:scale-105 relative z-10"
                       />
                     </AnimatePresence>
                   </motion.div>

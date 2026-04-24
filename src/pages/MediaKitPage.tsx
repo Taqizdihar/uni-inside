@@ -65,8 +65,24 @@ const MediaKitPage = ({ isDarkMode, theme, lang = 'id' as Lang }: { isDarkMode: 
   useEffect(() => {
     if (activeTab === 'instagram' && (window as any).instgrm) {
       (window as any).instgrm.Embeds.process();
+    } else if (activeTab === 'tiktok') {
+      // TikTok's script needs to be re-run to scan for new blockquotes
+      const existingScript = document.getElementById('tiktok-embed-script');
+      if (existingScript) {
+        existingScript.remove();
+      }
+      const ttScript = document.createElement('script');
+      ttScript.id = 'tiktok-embed-script';
+      ttScript.src = 'https://www.tiktok.com/embed.js';
+      ttScript.async = true;
+      document.body.appendChild(ttScript);
     }
   }, [activeTab]);
+
+  const extractTikTokId = (url: string) => {
+    const match = url.match(/\/video\/(\d+)/);
+    return match ? match[1] : '';
+  };
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -332,9 +348,11 @@ const MediaKitPage = ({ isDarkMode, theme, lang = 'id' as Lang }: { isDarkMode: 
                 dragTransition={{ bounceStiffness: 300, bounceDamping: 30 }}
               >
                 {SITE_CONFIG.latestPosts[activeTab].map((url, i) => {
+                  const ttId = activeTab === 'tiktok' ? extractTikTokId(url) : '';
+                  
                   return (
                     <motion.div
-                      key={`${activeTab}-${i}`}
+                      key={`${activeTab}-${ttId || i}`}
                       className={`shrink-0 w-[280px] md:w-[320px] rounded-3xl overflow-hidden border ${theme.border} ${theme.cardBg} backdrop-blur-xl relative group shadow-2xl`}
                       whileHover={{ y: -8, scale: 1.02 }}
                       transition={{ duration: 0.4 }}
@@ -354,14 +372,19 @@ const MediaKitPage = ({ isDarkMode, theme, lang = 'id' as Lang }: { isDarkMode: 
                             ></blockquote>
                           </div>
                         ) : (
-                          <div className="w-full h-full overflow-hidden">
+                          <div className="w-full h-full overflow-hidden flex flex-col items-center justify-center">
                              <blockquote 
+                              key={ttId}
                               className="tiktok-embed" 
                               cite={url} 
-                              data-video-id={url.split('/video/')[1]?.split('?')[0] || ''}
+                              data-video-id={ttId}
                               style={{ width: '100%', height: '100%', margin: 0, padding: 0 }}
                             >
-                              <section></section>
+                              <section className="p-4 text-center">
+                                <a target="_blank" href={url} rel="noreferrer" className={`text-sm ${theme.textYellow} hover:underline`}>
+                                  View on TikTok
+                                </a>
+                              </section>
                             </blockquote>
                           </div>
                         )}
